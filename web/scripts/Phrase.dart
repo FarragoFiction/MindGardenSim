@@ -6,11 +6,28 @@ import 'Key.dart';
 class Phrase {
     String text;
     String remainingText;
+    static List<Phrase> phrases = new List<Phrase>();
+    static int phraseIndex = 0;
 
 
 
     Phrase(this.text) {
         this.text = this.text.toUpperCase();
+        phrases.add(this);
+    }
+
+
+
+    static Phrase nextPhrase() {
+        if(phrases.isEmpty) {
+            setup();
+        }
+        phraseIndex ++;
+        if(phraseIndex > phrases.length) {
+            phraseIndex =1;
+            phrases.shuffle();
+        }
+        return phrases[phraseIndex-1];
     }
 
     void display(Element parent) {
@@ -20,11 +37,11 @@ class Phrase {
 
         StreamSubscription listener;
         listener = window.onKeyDown.listen((KeyboardEvent e) {
-            handleTyping(container, listener, e);
+            handleTyping(container, listener, e, parent);
         });
     }
 
-    void handleTyping(Element container, StreamSubscription listener,KeyboardEvent e) {
+    void handleTyping(Element container, StreamSubscription listener,KeyboardEvent e, Element parent) {
         //TODO if you type the expected next letter, remove it from remaining, change its color
         //TODO if there are no more expected letters, stop listener and remove self
         String expectedKey = remainingText[0];
@@ -36,5 +53,16 @@ class Phrase {
         }else {
             print ("what is ${e.keyCode} is it $givenKey? ${Key.keys}");
         }
+
+        if(remainingText.isEmpty) {
+            listener.cancel();
+            container.remove();
+            nextPhrase().display(parent);
+        }
+    }
+
+    static void setup() {
+        new Phrase("THE QUICK BROWN FOX RACED PAST THE LAZY DOG.");
+        new Phrase("hello world");
     }
 }
