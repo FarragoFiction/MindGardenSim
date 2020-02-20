@@ -9,6 +9,12 @@ class Game {
     static AudioElement music = new AudioElement();
     static AudioElement voiceOver = new AudioElement();
 
+    //flowers last longer the better the hp
+    //and weeds are more likely to spawn compared to inverse hp
+    int hp = -1300;
+    int minHP = -1300;
+    int maxHP = 1300;
+
     void display(Element parent) {
         container = new DivElement()..classes.add("game");
         parent.append(container);
