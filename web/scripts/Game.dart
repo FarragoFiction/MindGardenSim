@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 
 class Game {
@@ -9,16 +10,34 @@ class Game {
     void display(Element parent) {
         container = new DivElement()..classes.add("game");
         parent.append(container);
-        ButtonElement start = new ButtonElement()..text = "start";
-        container.append(start);
-        container.onClick.listen((Event e) {
+        ButtonElement start = new ButtonElement()..text = "Start";
+        StreamSubscription listener;
+        listener = container.onClick.listen((Event e) {
             playSoundEffect("254286__jagadamba__mechanical-switch");
+            listener.cancel();
             startGame();
         });
+
+        DivElement titleScreen = new DivElement()..text = "Hello World"..classes.add("titleScreen");
+        titleScreen.append(start);
+        container.append(titleScreen);
+    }
+
+    void clearGameScreen() {
+        container.text = "";
     }
 
     void startGame() {
-
+        clearGameScreen();
+        playVoiceOver("gardenintro");
+        DivElement titleScreen = new DivElement()..text = "TODO: WRITE TRANSCRIPT OF CONTENT HERE"..classes.add("titleScreen");
+        ButtonElement start = new ButtonElement()..text = "Skip...";
+        start.onClick.listen((Event e) {
+            playSoundEffect("254286__jagadamba__mechanical-switch");
+            voiceOver.pause();
+        });
+        titleScreen.append(start);
+        container.append(titleScreen);
     }
 
     static void playSoundEffect(String locationWithoutExtension, [loop = false]) {
