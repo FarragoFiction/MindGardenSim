@@ -1,5 +1,5 @@
 import 'dart:html';
-
+import 'dart:async';
 import 'Phrase.dart';
 
 /*
@@ -14,6 +14,8 @@ class Weed {
     ImageElement sprite;
     String flowerLocation;
     bool purified = false;
+    StreamSubscription clickListener;
+
     Element lie;
 
     Weed(this.brainLie, String refutation, String imageLoc, String this.flowerLocation) {
@@ -24,7 +26,7 @@ class Weed {
     void display(Element container, int x, int y) {
         //TODO make the hover text a tool tip. oh god.
 
-        SpanElement wrapper = new SpanElement()..classes.add("tooltip");
+        SpanElement wrapper = new SpanElement()..classes.add("tooltip")..classes.add("lietip");
         wrapper.style.position = "absolute";
         wrapper.style.top = "${y}px";
         wrapper.style.left = "${x}px";
@@ -33,12 +35,17 @@ class Weed {
         wrapper.append(sprite);
         wrapper.append(lie);
         container.append(wrapper);
+        clickListener = wrapper.onClick.listen((Event e) {
+            phrase.display(container, purify);
+        });
     }
 
     void purify() {
         lie.text = phrase.text;
-        sprite.src = flowerLocation;
+        lie.style.backgroundColor=null;
+        sprite.src = "images/Flowers/$flowerLocation";
         lie.classes.add("purifiedtip"); //be pink and shit
+        lie.classes.remove("lietip");
         //TODO cancel sprite.onClick = null;
     }
 

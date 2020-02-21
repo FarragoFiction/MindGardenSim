@@ -75,7 +75,6 @@ class Game {
     }
 
     void startGameNext() {
-        Phrase.nextPhrase().display(container);
         //TODO start up a weed spawn loop and a flower tick loop
         for(int i = 0; i<13; i++) {
             spawnWeed();

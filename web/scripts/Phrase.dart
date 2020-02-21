@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'Key.dart';
+import 'Weed.dart';
 
 class Phrase {
     String text;
@@ -30,18 +31,18 @@ class Phrase {
         return phrases[phraseIndex-1];
     }
 
-    void display(Element parent) {
+    void display(Element parent, dynamic callback) {
         remainingText = text;
         DivElement container = new DivElement()..classes.add("phrase")..text = text;
         parent.append(container);
 
         StreamSubscription listener;
         listener = window.onKeyDown.listen((KeyboardEvent e) {
-            handleTyping(container, listener, e, parent);
+            handleTyping(container, listener, e, parent, callback);
         });
     }
 
-    void handleTyping(Element container, StreamSubscription listener,KeyboardEvent e, Element parent) {
+    void handleTyping(Element container, StreamSubscription listener,KeyboardEvent e, Element parent, dynamic callback) {
         //TODO if you type the expected next letter, remove it from remaining, change its color
         //TODO if there are no more expected letters, stop listener and remove self
         String expectedKey = remainingText[0];
@@ -57,7 +58,8 @@ class Phrase {
         if(remainingText.isEmpty) {
             listener.cancel();
             container.remove();
-            nextPhrase().display(parent);
+            callback();
+            //nextPhrase().display(parent);
         }
     }
 
