@@ -13,7 +13,7 @@ class Weed {
     ImageElement sprite;
     Weed(this.brainLie, String refutation, String imageLoc) {
         phrase = new Phrase(refutation);
-        sprite = new ImageElement(src: "images/$imageLoc")..classes.add("weed");
+        sprite = new ImageElement(src: "images/Flowers/$imageLoc")..classes.add("weed");
     }
 
     void display(Element container, int x, int y) {

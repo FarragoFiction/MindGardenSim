@@ -2,12 +2,16 @@ import 'dart:async';
 import 'dart:html';
 
 import 'Phrase.dart';
+import "Weed.dart";
+import "package:CommonLib/Random.dart";
 
 class Game {
     Element container;
     static AudioElement soundEffects = new AudioElement();
     static AudioElement music = new AudioElement();
     static AudioElement voiceOver = new AudioElement();
+    List<Weed> weeds = new List<Weed>();
+
 
     //flowers last longer the better the hp
     //and weeds are more likely to spawn compared to inverse hp
@@ -50,8 +54,24 @@ class Game {
         container.append(titleScreen);
     }
 
+    void spawnWeed() {
+        Weed weed = new Weed("You are a bad", "No, you are a good.", "flowersample.png");
+        weeds.add(weed);
+        int maxY = 400;
+        int minY = 280;
+        int maxX = 700;
+        int minX = 0;
+        Random rand = new Random();
+        //TODO randomize spawn location
+        weed.display(container,rand.nextIntRange(minX, maxX),rand.nextIntRange(minY, maxY));
+    }
+
     void startGameNext() {
         Phrase.nextPhrase().display(container);
+        //TODO start up a weed spawn loop and a flower tick loop
+        spawnWeed();
+        spawnWeed();
+        spawnWeed();
     }
 
     static void playSoundEffect(String locationWithoutExtension, [loop = false]) {

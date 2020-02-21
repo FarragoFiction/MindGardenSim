@@ -22,6 +22,12 @@ html, body {
     background:  url("images/background.png");
 }
 
+.weed{
+    position: absolute;
+    z-index: 13;
+    height: 50px;
+}
+
 .titleScreen{
     position: absolute;
     background-color: red;
