@@ -22,10 +22,31 @@ html, body {
     background:  url("images/background.png");
 }
 
+@keyframes pulse {
+   0% { -moz-transform: scaleY(1);
+              -o-transform: scaleY(1);
+              -webkit-transform: scaleY(1);
+              transform: scaleY(1);
+        }
+
+    50% { -moz-transform: scale(1.10);
+                      -o-transform: scaleY(1.1);
+                      -webkit-transform: scaleY(1.1);
+                      transform: scaleY(1.1);
+     }
+
+      100% { -moz-transform: scaleX(1);
+                           -o-transform: scaleY(1);
+                           -webkit-transform: scaleY(1);
+                           transform: scaleY(1);
+          }
+}
+
 .weed{
     position: absolute;
     z-index: 13;
     height: 50px;
+    animation: pulse 2.0s steps(10) infinite;
 }
 
 .titleScreen{

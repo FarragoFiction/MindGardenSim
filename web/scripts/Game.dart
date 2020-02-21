@@ -55,7 +55,7 @@ class Game {
     }
 
     void spawnWeed() {
-        Weed weed = new Weed("You are a bad", "No, you are a good.", "flowersample.png");
+        Weed weed;
         weeds.add(weed);
         int maxY = 400;
         int minY = 280;
@@ -63,15 +63,25 @@ class Game {
         int minX = 0;
         Random rand = new Random();
         //TODO randomize spawn location
+        double number = rand.nextDouble();
+        if(number > .5) {
+            weed = new Absolute();
+        }else if(number > .3) {
+            weed = new OClock();
+        }else {
+            weed = new BlackAndWhite();
+        }
         weed.display(container,rand.nextIntRange(minX, maxX),rand.nextIntRange(minY, maxY));
     }
 
     void startGameNext() {
         Phrase.nextPhrase().display(container);
         //TODO start up a weed spawn loop and a flower tick loop
-        spawnWeed();
-        spawnWeed();
-        spawnWeed();
+        for(int i = 0; i<13; i++) {
+            spawnWeed();
+            spawnWeed();
+            spawnWeed();
+        }
     }
 
     static void playSoundEffect(String locationWithoutExtension, [loop = false]) {
