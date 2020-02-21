@@ -64,6 +64,11 @@ html, body {
   transition: opacity 0.3s;
 }
 
+.purifiedtip {
+  background-color: #555;
+  color: #fff;
+}
+
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;

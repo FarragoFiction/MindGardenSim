@@ -12,8 +12,11 @@ class Weed {
     String brainLie;
     Phrase phrase;
     ImageElement sprite;
+    String flowerLocation;
+    bool purified = false;
+    Element lie;
 
-    Weed(this.brainLie, String refutation, String imageLoc) {
+    Weed(this.brainLie, String refutation, String imageLoc, String this.flowerLocation) {
         phrase = new Phrase(refutation);
         sprite = new ImageElement(src: "images/Flowers/$imageLoc")..classes.add("weed");
     }
@@ -26,21 +29,26 @@ class Weed {
         wrapper.style.top = "${y}px";
         wrapper.style.left = "${x}px";
         wrapper.style.zIndex = "$y";
-        DivElement lie = new DivElement()..text = brainLie..classes.add("tooltiptext");
+        lie = new DivElement()..text = brainLie..classes.add("tooltiptext");
         wrapper.append(sprite);
         wrapper.append(lie);
         container.append(wrapper);
     }
+
+    void purify() {
+        lie.text = phrase.text;
+    }
+
 }
 
 class OClock extends Weed{
-  OClock() : super("I’ll never amount to anything.", "If I get just a little bit stronger each day, eventually I will be completely different from who I am today.", "oclock.gif");
+  OClock() : super("I’ll never amount to anything.", "If I get just a little bit stronger each day, eventually I will be completely different from who I am today.", "oclock.gif", "clockpure.png");
 }
 
 class Absolute extends Weed{
-    Absolute() : super("You always mess up.", "I mess up more than I would like, but I’m trying to get better.", "stone.gif");
+    Absolute() : super("You always mess up.", "I mess up more than I would like, but I’m trying to get better.", "stone.gif","flower1.gif");
 }
 
 class BlackAndWhite extends Weed{
-    BlackAndWhite() : super("You messed up. You're worthless.", "Even if I mess up occasionally, I still have worth.", "blackandwhite.gif");
+    BlackAndWhite() : super("You messed up. You're worthless.", "Even if I mess up occasionally, I still have worth.", "blackandwhite.gif","pinwheelpure.gif");
 }
