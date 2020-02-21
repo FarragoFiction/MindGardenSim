@@ -20,10 +20,16 @@ class Weed {
 
     void display(Element container, int x, int y) {
         //TODO make the hover text a tool tip. oh god.
-        sprite.style.top = "${y}px";
-        sprite.style.left = "${x}px";
-        sprite.style.zIndex = "$y";
-        container.append(sprite);
+
+        SpanElement wrapper = new SpanElement()..classes.add("tooltip");
+        wrapper.style.position = "absolute";
+        wrapper.style.top = "${y}px";
+        wrapper.style.left = "${x}px";
+        wrapper.style.zIndex = "$y";
+        DivElement lie = new DivElement()..text = brainLie..classes.add("tooltiptext");
+        wrapper.append(sprite);
+        wrapper.append(lie);
+        container.append(wrapper);
     }
 }
 
@@ -36,5 +42,5 @@ class Absolute extends Weed{
 }
 
 class BlackAndWhite extends Weed{
-    BlackAndWhite() : super("You messed up. you're worthless.", "Even if I mess up occasionally, I still have worth.", "blackandwhite.gif");
+    BlackAndWhite() : super("You messed up. You're worthless.", "Even if I mess up occasionally, I still have worth.", "blackandwhite.gif");
 }

@@ -59,7 +59,7 @@ class Game {
         weeds.add(weed);
         int maxY = 400;
         int minY = 280;
-        int maxX = 700;
+        int maxX = 680;
         int minX = 0;
         Random rand = new Random();
         //TODO randomize spawn location
