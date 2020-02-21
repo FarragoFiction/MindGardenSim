@@ -37,6 +37,9 @@ class Weed {
 
     void purify() {
         lie.text = phrase.text;
+        sprite.src = flowerLocation;
+        lie.classes.add("purifiedtip"); //be pink and shit
+        //TODO cancel sprite.onClick = null;
     }
 
 }
