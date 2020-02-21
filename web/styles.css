@@ -65,8 +65,8 @@ html, body {
 }
 
 .purifiedtip {
-  background-color: #555;
-  color: #fff;
+  background-color: #ffbbcf;
+  color: #ffdbe6;
 }
 
 .tooltip:hover .tooltiptext {
