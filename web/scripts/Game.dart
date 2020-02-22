@@ -6,6 +6,7 @@ import "Weed.dart";
 import "package:CommonLib/Random.dart";
 
 class Game {
+    Element skyBG;
     Element container;
     static AudioElement soundEffects = new AudioElement();
     static AudioElement music = new AudioElement();
@@ -20,9 +21,11 @@ class Game {
     int maxHP = 1300;
 
     void display(Element parent) {
+        skyBG = new DivElement()..classes.add("skyBG");
         container = new DivElement()..classes.add("game");
-        parent.append(container);
-        ButtonElement start = new ButtonElement()..text = "Start";
+        parent.append(skyBG);
+        skyBG.append(container);
+        ButtonElement start = new ButtonElement()..text = "Start"..classes.add("startbutton");
         StreamSubscription listener;
         listener = container.onClick.listen((Event e) {
             playSoundEffect("254286__jagadamba__mechanical-switch");
@@ -30,7 +33,11 @@ class Game {
             startGameIntro();
         });
 
-        DivElement titleScreen = new DivElement()..text = "Hello World"..classes.add("titleScreen");
+        DivElement titleScreen = new DivElement()..classes.add("titleScreen");
+        DivElement div1 = new DivElement()..text = "Garden of the Mind"..classes.add("title");
+        DivElement div2 = new DivElement()..text = "This game uses both audio and text to provide encouragement and instructions. It uses the keyboard for typing."..classes.add("instructions");
+        titleScreen.append(div1);
+        titleScreen.append(div2);
         titleScreen.append(start);
         container.append(titleScreen);
     }
