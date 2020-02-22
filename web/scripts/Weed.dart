@@ -50,7 +50,7 @@ class Weed {
     }
 
 }
-
+//TODO leave all these things as the default values for them, but also have a constructor for a random thought from a file
 class OClock extends Weed{
   OClock() : super("I’ll never amount to anything.", "If I get just a little bit stronger each day, eventually I will be completely different from who I am today.", "oclock.gif", "clockpure.png");
 }
