@@ -56,9 +56,10 @@ class Game {
     void tutorialIntroCallback(TranscribedAudio caller) {
         Weed weed = new Absolute();
         spawnWeed(weed);
-        weed.sprite.onMouseEnter.listen((Event e) {
+        StreamSubscription listener;
+        listener = weed.sprite.onMouseEnter.listen((Event e) {
             TranscribedAudio.tutorial1Audio().display(container, tutorial1Callback);
-
+            listener.cancel();
         });
     }
 
