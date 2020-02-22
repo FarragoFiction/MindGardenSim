@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'Phrase.dart';
+import 'SoundController.dart';
 import 'TranscribedAudio.dart';
 import 'TranscriptionSegment.dart';
 import "Weed.dart";
@@ -10,8 +11,7 @@ import "package:CommonLib/Random.dart";
 class Game {
     Element skyBG;
     Element container;
-    static AudioElement soundEffects = new AudioElement();
-    static AudioElement music = new AudioElement();
+
     List<Weed> weeds = new List<Weed>();
 
     //flowers last longer the better the hp
@@ -28,7 +28,7 @@ class Game {
         ButtonElement start = new ButtonElement()..text = "Start"..classes.add("startbutton");
         StreamSubscription listener;
         listener = container.onClick.listen((Event e) {
-            playSoundEffect("254286__jagadamba__mechanical-switch");
+            SoundController.playSoundEffect("254286__jagadamba__mechanical-switch");
             listener.cancel();
             startGameIntro();
         });
@@ -50,15 +50,20 @@ class Game {
 
     void startGameIntro() {
         clearGameScreen();
-        spawnWeed(new Absolute());
         TranscribedAudio.introAudio().display(container, tutorialIntroCallback);
     }
 
     void tutorialIntroCallback(TranscribedAudio caller) {
-        //TODO wait for them to hover over the flower.
-        caller.container.remove();
-        playSoundEffect("254286__jagadamba__mechanical-switch");
-        startGameNext();
+        Weed weed = new Absolute();
+        spawnWeed(weed);
+        weed.sprite.onMouseEnter.listen((Event e) {
+            TranscribedAudio.tutorial1Audio().display(container, tutorial1Callback);
+
+        });
+    }
+
+    void tutorial1Callback(TranscribedAudio caller) {
+        //TODO give the only weed on screen a callback so i know when its done
     }
 
     void spawnWeed([Weed weed]) {
@@ -91,20 +96,5 @@ class Game {
         }
     }
 
-    static void playSoundEffect(String locationWithoutExtension, [loop = false]) {
-        if(soundEffects.canPlayType("audio/mpeg").isNotEmpty) soundEffects.src = "Sounds/${locationWithoutExtension}.mp3";
-        if(soundEffects.canPlayType("audio/ogg").isNotEmpty) soundEffects.src = "Sounds/${locationWithoutExtension}.ogg";
-        soundEffects.loop = loop;
-        soundEffects.play();
-    }
-
-
-
-    static void playMusic(String locationWithoutExtension, [loop = true]) {
-        if(music.canPlayType("audio/mpeg").isNotEmpty) music.src = "Sounds/${locationWithoutExtension}.mp3";
-        if(music.canPlayType("audio/ogg").isNotEmpty) music.src = "Sounds/${locationWithoutExtension}.ogg";
-        music.loop = loop;
-        music.play();
-    }
 
 }
