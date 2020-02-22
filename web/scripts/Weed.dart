@@ -56,7 +56,7 @@ class OClock extends Weed{
 }
 
 class Absolute extends Weed{
-    Absolute() : super("You always mess up.", "I mess up more than I would like, but I’m trying to get better.", "stone.gif","flower1.gif");
+    Absolute() : super("You always mess up.", "I mess up more than I would like, but I'm trying to get better.", "stone.gif","flower1.gif");
 }
 
 class BlackAndWhite extends Weed{

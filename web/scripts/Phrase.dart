@@ -52,7 +52,7 @@ class Phrase {
             List<String> split = text.split(remainingText);
             container.setInnerHtml("<font color='green'>${split[0]}</font>${remainingText}");
         }else {
-            print ("what is ${e.keyCode} is it $givenKey? ${Key.keys}");
+            print ("what is ${e.keyCode} is it $givenKey? ${Key.keys}, I was expecting $expectedKey");
         }
 
         if(remainingText.isEmpty) {

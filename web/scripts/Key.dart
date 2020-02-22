@@ -51,8 +51,7 @@ class Key {
         new Key(KeyCode.QUESTION_MARK, "?");
         new Key(KeyCode.SPACE, " ");
         new Key(KeyCode.ONE, "!");
-        new Key(KeyCode.SINGLE_QUOTE, "'");
-
+        new Key(222, "'");
     }
 
 
