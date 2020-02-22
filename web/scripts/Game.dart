@@ -13,6 +13,8 @@ class Game {
     static AudioElement voiceOver = new AudioElement();
     List<Weed> weeds = new List<Weed>();
 
+    String tutorial1 = "Hi, JR here, and I’m here to talk to you about the types of self talk and how they directly influence how capable of a person you are.<br><br>For me, I’ve had my share of failures, mistakes, and moments where my self control and restraint weren’t quite strong enough. But I do my best to tend a garden of my strengths and let any thoughts punishing myself for my weakness be pulled up at the root.  I made this game to try to better explain why I think that’s a source of strength that anyone can pursue.<br><Br>On the screen right now, you should see a single weed perservering even in rocky soil. This represents a Mind cultivated in the harsh conditions of negative self talk, where only invasive weeds can grow.  You can see the thoughts associated with the weed if you mouse over it.  Once you’ve confirmed that, I can show you how to begin weeding the garden :)";
+
 
     //flowers last longer the better the hp
     //and weeds are more likely to spawn compared to inverse hp
@@ -35,8 +37,10 @@ class Game {
 
         DivElement titleScreen = new DivElement()..classes.add("titleScreen");
         DivElement div1 = new DivElement()..text = "Garden of the Mind"..classes.add("title");
+        ImageElement image = new ImageElement(src: "images/mind.png")..classes.add("logo");
         DivElement div2 = new DivElement()..text = "This game uses both audio and text to provide encouragement and instructions. It uses the keyboard for typing."..classes.add("instructions");
         titleScreen.append(div1);
+        titleScreen.append(image);
         titleScreen.append(div2);
         titleScreen.append(start);
         container.append(titleScreen);
@@ -49,7 +53,7 @@ class Game {
     void startGameIntro() {
         clearGameScreen();
         playVoiceOver("gardenintro");
-        DivElement titleScreen = new DivElement()..text = "TODO: WRITE TRANSCRIPT OF CONTENT HERE"..classes.add("transcript");
+        DivElement titleScreen = new DivElement()..text = tutorial1..classes.add("transcript");
         ButtonElement start = new ButtonElement()..text = "Skip...";
         start.onClick.listen((Event e) {
             titleScreen.remove();
@@ -109,4 +113,5 @@ class Game {
         music.loop = loop;
         music.play();
     }
+
 }
