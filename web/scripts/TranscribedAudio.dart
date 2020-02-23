@@ -19,9 +19,7 @@ class TranscribedAudio {
             return null;
         }
 
-        TranscribedAudio(this.audioLocation, this.segments) {
-
-        }
+        TranscribedAudio(this.audioLocation, this.segments);
 
         static TranscribedAudio tutorial1Audio() {
             TranscribedAudio ret = new TranscribedAudio("GARDEN1", <TranscriptionSegment>[]);
@@ -31,6 +29,37 @@ class TranscribedAudio {
             ret.segments.add(new TranscriptionSegment(56,"The thought you looked at is an Absolute. This one claims “I always mess up.”. There’s a few ways to mutate it into something healthier, but my favorite way to handle Absolutes is to chip away at the inflexible, rocky certainty of them.  If you type “I mess up more than I would like, but I’m trying to get better.” you can see how it mutates. Click the weed to type."));
             return ret;
         }
+
+    static TranscribedAudio tutorial2Audio() {
+        TranscribedAudio ret = new TranscribedAudio("GARDEN2", <TranscriptionSegment>[]);
+        // ret.segments.add(new TranscriptionSegment(0,""));
+        ret.segments.add(new TranscriptionSegment(0,"You see :) :) :) Isn’t that better? It’s good to remind yourself that you don’t ALWAYS do poorly, and that you can work towards improving your win/lose ratio.  Be more flexible with your self judgements, and future you will be strong."));
+        ret.segments.add(new TranscriptionSegment(18,"Speaking of the future, here is an O'Clock thought. This one claims “I’ll never amount to anything.” Never is an *awful* long time for a weed to have knowledge of, isn’t it? Let’s try to mutate it by clicking, then typing “If I get just a little bit stronger each day, eventually I will be completely different from who I am today.”"));
+        return ret;
+    }
+
+    static TranscribedAudio tutorial3Audio() {
+        TranscribedAudio ret = new TranscribedAudio("GARDEN3", <TranscriptionSegment>[]);
+        // ret.segments.add(new TranscriptionSegment(0,""));
+        ret.segments.add(new TranscriptionSegment(0,"You did it :) :) :)  The future is a huge , unpredictable place and we can steer ourselves towards one we’ll be proud of. Nothing is locked in place, no matter what an O'Clock tries to tell you."));
+        ret.segments.add(new TranscriptionSegment(14,"The final thought type is a Black and White.  This one claims “If I’m not perfect, then I’m worthless.”. These ones are especially hard to get rid of for me, mostly because they never really fully surface? They stay underground, encouraging the other thoughts to popup. Go ahead and type “Even if I mess up occasionally, I still have worth.” to get rid of the little jerk."));
+        return ret;
+    }
+
+    static TranscribedAudio tutorialFinalAudio() {
+        TranscribedAudio ret = new TranscribedAudio("GARDENFINAL", <TranscriptionSegment>[]);
+        // ret.segments.add(new TranscriptionSegment(0,""));
+        ret.segments.add(new TranscriptionSegment(0,"You got it!  It’s hard to get a bead on those mostly hidden thoughts, isn’t it? I try to remember I wouldn’t judge a friend so harshly, as either perfect or subhuman, as black or white, so I should never judge myself that way either."));
+        ret.segments.add(new TranscriptionSegment(17,"That’s the basics of the flower types, I really appreciate you listening this far. I have just one more thing to go over with you, and that’s the ambient conditions of the garden."));
+        ret.segments.add(new TranscriptionSegment(27,"Right now, with how rocky the soil is, the mutated thoughts don’t last long, do they? They fade quickly, because it’s hard to believe in them when they seem so out of place compared to how harsh reality is.  When you’ve tended a garden of negative self talk for long enough, it can seem pointless or cruel to try to cultivate the mutated positive thoughts. The hardy weeds seem kinder, keeping your guard up in a harsh world protects you. After all, reality won’t forgive you for making a mistake, so why should you coddle yourself? I get it. "));
+        ret.segments.add(new TranscriptionSegment(63,"But."));
+        ret.segments.add(new TranscriptionSegment(66,"BUT."));
+        ret.segments.add(new TranscriptionSegment(68,"THAT is itself a weed. The biggest weed of them all. You can improve the soil, improve YOURSELF and make yourself stronger, more capable, more resilient to stress. You can make your mind a flourishing garden.  To me, that is a much better goal than keeping it a barren wasteland.  I want to be better, to be stronger, to make less mistakes and let each mistake cost me less. When my garden is bare, each mistake takes so much out of me…"));
+        ret.segments.add(new TranscriptionSegment(103,"Every second a weed is in place, your garden becomes weaker, less fertile, more rocky. It gets harder for flowers to thrive in it. They vanish nearly as soon as you plant them. But if you start mutating each weed as you find it, something begins to change.  Without the drain of the weeds, the soil is given a chance to recover, and soon each flower can root deeper and deeper into the fertile soil. You might even find flowers start naturally appearing in hospitable conditions."));
+        ret.segments.add(new TranscriptionSegment(133,"Negative self talk, the weeds,  are a *punishment* for failing at something important to you. It makes you fear failure, fear *action*. Negative self talk makes you want to give up. Positive self talk, the flowers, are a *reward* for improving. They make you crave success, crave action. They make failure sting just a little bit less, which makes taking action even easier. "));
+        ret.segments.add(new TranscriptionSegment(164,"I hope you enjoy working towards making a vibrant garden filled with flowers in this game, and I hope even more that this will inspire you to tend your mental garden, to fill yourself with things that support you and make you strong.  "));
+        return ret;
+    }
 
     static TranscribedAudio introAudio() {
         TranscribedAudio ret = new TranscribedAudio("gardenintro", <TranscriptionSegment>[]);
@@ -42,7 +71,7 @@ class TranscribedAudio {
     }
 
         void display(Element parent, dynamic callback) {
-            container = new DivElement()..text = segments[index].text..classes.add("transcription");
+            container = new DivElement()..setInnerHtml(segments[index].text)..classes.add("transcription");
             playVoiceOver(audioLocation);
             parent.append(container);
             ButtonElement button = new ButtonElement()..text = "Skip...";
@@ -52,21 +81,18 @@ class TranscribedAudio {
                 button.remove();
                 voiceOver.pause(); //this triggers pause listener
             });
-            /*TODO
-                display this text. meanwhile, keep track of when the NEXT segment will be ready
-                when it is, replace the text with the new segment
-                if you're done playing, do a callback (might need to wait for an action to remove)
-             */
             voiceOver.onPause.listen((Event e) {
                 container.remove();
                 button.remove();
-                callback(this);
+                if(callback != null) {
+                    callback();
+                }
             });
 
             voiceOver.onTimeUpdate.listen((Event e) {
                 print(voiceOver.currentTime);
                 if(nextSegment != null && voiceOver.currentTime >= nextSegment.timeCodeStart) {
-                    container.text = nextSegment.text;
+                    container.setInnerHtml(nextSegment.text);
                     index ++;
                 }
             });

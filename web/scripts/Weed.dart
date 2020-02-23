@@ -14,6 +14,7 @@ class Weed {
     ImageElement sprite;
     String flowerLocation;
     bool purified = false;
+    dynamic callback;
     StreamSubscription clickListener;
 
     Element lie;
@@ -37,6 +38,7 @@ class Weed {
         container.append(wrapper);
         clickListener = wrapper.onClick.listen((Event e) {
             phrase.display(container, purify);
+            clickListener.cancel();
         });
     }
 
@@ -46,6 +48,10 @@ class Weed {
         sprite.src = "images/Flowers/$flowerLocation";
         lie.classes.add("purifiedtip"); //be pink and shit
         lie.classes.remove("lietip");
+        if(callback != null) {
+            print("callback is $callback, ${callback.runtimeType}");
+            callback();
+        }
         //TODO cancel sprite.onClick = null;
     }
 

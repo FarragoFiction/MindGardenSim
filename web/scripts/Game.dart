@@ -12,6 +12,8 @@ class Game {
     Element skyBG;
     Element container;
 
+    //need to tick them down to get rid of them (but only if they are flowers)
+    //also for reproduction
     List<Weed> weeds = new List<Weed>();
 
     //flowers last longer the better the hp
@@ -50,21 +52,40 @@ class Game {
 
     void startGameIntro() {
         clearGameScreen();
+        SoundController.playMusic("463903__burghrecords__birds-in-spring-scotland");
         TranscribedAudio.introAudio().display(container, tutorialIntroCallback);
     }
 
-    void tutorialIntroCallback(TranscribedAudio caller) {
+    void tutorialIntroCallback() {
         Weed weed = new Absolute();
         spawnWeed(weed);
+        //put callback asap because if someont types this out without it the game is unplayable
+        weed.callback = tutorial1CallbackPart2;
         StreamSubscription listener;
         listener = weed.sprite.onMouseEnter.listen((Event e) {
-            TranscribedAudio.tutorial1Audio().display(container, tutorial1Callback);
+            TranscribedAudio.tutorial1Audio().display(container, null);
             listener.cancel();
         });
     }
 
-    void tutorial1Callback(TranscribedAudio caller) {
-        //TODO give the only weed on screen a callback so i know when its done
+    void tutorial1CallbackPart2() {
+        TranscribedAudio.tutorial2Audio().display(container, null);
+        Weed weed = new OClock();
+        spawnWeed(weed);
+        weed.callback = tutorial2CallbackPart2;
+    }
+
+    void tutorial2CallbackPart2() {
+        TranscribedAudio.tutorial3Audio().display(container, null);
+        Weed weed = new BlackAndWhite();
+        spawnWeed(weed);
+        weed.callback = tutoria3CallbackPart2;
+    }
+
+    void tutoria3CallbackPart2() {
+        TranscribedAudio.tutorialFinalAudio().display(container, null);
+        //TODO start game loop here.
+        print("start game loop here");
     }
 
     void spawnWeed([Weed weed]) {
