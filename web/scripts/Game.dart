@@ -10,8 +10,11 @@ import "package:CommonLib/Random.dart";
 
 class Game {
     Element stupidExtraDivForSkyShit;
+    Element bgContainer;
     Element container;
     Element hpMeter;
+    List<Element> skyShit = new List<Element>();
+    Element spookyOverlay;
     static Game _instance;
     static Game get instance => _instance != null?_instance:new Game();
 
@@ -41,9 +44,15 @@ class Game {
     void display(Element parent) {
         stupidExtraDivForSkyShit = new DivElement()..classes.add("gameContainer");
         handleSky();
+        spookyOverlay = new DivElement()..classes.add("spookyOverLay");
         container = new DivElement()..classes.add("game");
+        bgContainer = new DivElement()..classes.add("gamebg");
+
+        checkBG();
         parent.append(stupidExtraDivForSkyShit);
+        stupidExtraDivForSkyShit.append(bgContainer);
         stupidExtraDivForSkyShit.append(container);
+        stupidExtraDivForSkyShit.append(spookyOverlay);
         ButtonElement start = new ButtonElement()..text = "Start"..classes.add("startbutton");
         StreamSubscription listener;
         listener = container.onClick.listen((Event e) {
@@ -68,7 +77,7 @@ class Game {
         DivElement sky2 = new DivElement()..classes.add("skyBG2")..style.background = "url('${randomBG()}')";;
         DivElement sky3 = new DivElement()..classes.add("skyBG3")..style.background = "url('${randomBG()}')";;
         DivElement sky4 = new DivElement()..classes.add("skyBG4")..style.background = "url('${randomBG()}')";;
-
+        skyShit = [sky1,sky2,sky3,sky4];
         stupidExtraDivForSkyShit.append(sky4);
         stupidExtraDivForSkyShit.append(sky3);
         stupidExtraDivForSkyShit.append(sky2);
@@ -127,6 +136,7 @@ class Game {
     }
 
     void spawnWeed([Weed weed, bool flower=false]) {
+        checkBG();
         int maxY = 400;
         int minY = 280;
         int maxX = 680;
@@ -164,11 +174,9 @@ class Game {
     }
 
     void checkBG() {
-        if(hp > 0 && container.style.background != "url('images/background.png')" ) {
-            container.style.background = "url('images/background.png'";
-        }else if(hp < 0 && container.style.background != "url('images/BGoverlay.png'") {
-            container.style.background = "url('images/BGoverlay.png'";
-        }
+        bgContainer.style.filter="sepia(${oddsWeedSpawn*100}%)";
+        skyShit.forEach((Element e) => e.style.filter = "sepia(${oddsWeedSpawn*50}%)");
+        spookyOverlay.style.opacity = "${oddsWeedSpawn/4}";
     }
 
     void checkFlowersForDeath() {

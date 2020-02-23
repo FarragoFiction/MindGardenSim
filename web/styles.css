@@ -17,7 +17,14 @@ html, body {
     position: absolute;
     width: 720px;
     height: 720px;
+}
+
+.gamebg{
+    position: absolute;
+    width: 720px;
+    height: 720px;
     background:  url("images/BGoverlay.png");
+
 }
 
 .gameContainer{
@@ -26,6 +33,15 @@ html, body {
     position: relative;
     margin-left: auto;
     margin-right: auto;
+}
+
+.spookyOverLay{
+    background: black;
+    opacity: 25%;
+    width: 720px;
+    height: 720px;
+    pointer-events: none;
+    position: absolute;
 }
 
 .skyBG1{
