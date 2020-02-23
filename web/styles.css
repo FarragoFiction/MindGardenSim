@@ -22,42 +22,48 @@ html, body {
     background:  url("images/BGoverlay.png");
 }
 
-.skyBG{
+.gameContainer{
     width: 720px;
     height: 720px;
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    background:  url("images/CloudStrife/BGclouds25.png");
-    animation: scroll 10.0s linear infinite;
+}
 
+.skyBG1{
+    width: 720px;
+    height: 720px;
+    position: absolute;
+    opacity: 66%;
+    background:  url("images/CloudStrife/BGclouds25.png");
+    animation: scroll 45.0s linear infinite;
 }
 
 .skyBG2{
     width: 720px;
     height: 720px;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    background:  url("images/clounds.png");
+    position: absolute;
+    opacity: 66%;
+    background:  url("images/CloudStrife/BGclouds25.png");
+    animation: scroll 60.0s linear infinite;
 }
 
 .skyBG3{
     width: 720px;
     height: 720px;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    background:  url("images/clounds.png");
+    position: absolute;
+    opacity: 55%;
+    background:  url("images/CloudStrife/BGclouds25.png");
+    animation: scroll 75.0s linear infinite;
 }
 
 .skyBG4{
     width: 720px;
     height: 720px;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    background:  url("images/clounds.png");
+    position: absolute;
+    opacity: 44%;
+    background:  url("images/CloudStrife/BGclouds25.png");
+    animation: scroll 100.0s linear infinite;
 }
 
 @keyframes scroll{

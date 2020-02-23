@@ -9,7 +9,7 @@ import "Weed.dart";
 import "package:CommonLib/Random.dart";
 
 class Game {
-    Element skyBG;
+    Element stupidExtraDivForSkyShit;
     Element container;
     Element hpMeter;
     static Game _instance;
@@ -39,10 +39,11 @@ class Game {
     }
 
     void display(Element parent) {
-        skyBG = new DivElement()..classes.add("skyBG");
+        stupidExtraDivForSkyShit = new DivElement()..classes.add("gameContainer");
+        handleSky();
         container = new DivElement()..classes.add("game");
-        parent.append(skyBG);
-        skyBG.append(container);
+        parent.append(stupidExtraDivForSkyShit);
+        stupidExtraDivForSkyShit.append(container);
         ButtonElement start = new ButtonElement()..text = "Start"..classes.add("startbutton");
         StreamSubscription listener;
         listener = container.onClick.listen((Event e) {
@@ -60,6 +61,24 @@ class Game {
         titleScreen.append(div2);
         titleScreen.append(start);
         container.append(titleScreen);
+    }
+
+    void handleSky() {
+        DivElement sky1 = new DivElement()..classes.add("skyBG1")..style.background = "url('${randomBG()}')";
+        DivElement sky2 = new DivElement()..classes.add("skyBG2")..style.background = "url('${randomBG()}')";;
+        DivElement sky3 = new DivElement()..classes.add("skyBG3")..style.background = "url('${randomBG()}')";;
+        DivElement sky4 = new DivElement()..classes.add("skyBG4")..style.background = "url('${randomBG()}')";;
+
+        stupidExtraDivForSkyShit.append(sky4);
+        stupidExtraDivForSkyShit.append(sky3);
+        stupidExtraDivForSkyShit.append(sky2);
+        stupidExtraDivForSkyShit.append(sky1);
+    }
+
+    String randomBG() {
+        Random rand = new Random();
+        int bgNum = rand.nextInt(25);
+        return "images/CloudStrife/BGclouds$bgNum.png";
     }
 
     void clearGameScreen() {
