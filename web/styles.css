@@ -17,7 +17,7 @@ html, body {
     position: absolute;
     width: 720px;
     height: 720px;
-    background:  url("images/background.png");
+    background:  url("images/BGoverlay.png");
 }
 
 .skyBG{
@@ -106,6 +106,13 @@ html, body {
     text-align: center;
     padding: 50px;
     padding-top: 0px;
+}
+
+.hp{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 72px;
 }
 
 .transcript{

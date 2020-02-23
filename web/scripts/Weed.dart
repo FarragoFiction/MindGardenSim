@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:async';
+import 'Game.dart';
 import 'Phrase.dart';
 
 /*
@@ -53,7 +54,7 @@ class Weed {
             print("callback is $callback, ${callback.runtimeType}");
             callback();
         }
-        //TODO cancel sprite.onClick = null;
+        Game.instance.purifiedFlower();
     }
 
 }

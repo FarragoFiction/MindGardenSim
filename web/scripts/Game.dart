@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:html';
-
+import 'dart:math' as Math;
 import 'Phrase.dart';
 import 'SoundController.dart';
 import 'TranscribedAudio.dart';
@@ -11,6 +11,9 @@ import "package:CommonLib/Random.dart";
 class Game {
     Element skyBG;
     Element container;
+    Element hpMeter;
+    static Game _instance;
+    static Game get instance => _instance != null?_instance:new Game();
 
     //need to tick them down to get rid of them (but only if they are flowers)
     //also for reproduction
@@ -23,7 +26,6 @@ class Game {
 
     //thanks to 1669 for helping me remember how linear algebra works
     double get oddsWeedSpawn => -1* hp/226 + 0.5;
-    double get oddsFlowerDie => 1/oddsWeedSpawn;
 
 
     //flowers last longer the better the hp
@@ -31,6 +33,10 @@ class Game {
     int hp = -113;
     int minHP = -112;
     int maxHP = 113;
+
+    Game() {
+        _instance = this;
+    }
 
     void display(Element parent) {
         skyBG = new DivElement()..classes.add("skyBG");
@@ -62,6 +68,8 @@ class Game {
 
     void startGameIntro() {
         clearGameScreen();
+        hpMeter = new DivElement()..classes.add("hp");
+        container.append(hpMeter);
         print("TODO: REMOVE THIS TICK");
         tick();
         SoundController.playMusic("463903__burghrecords__birds-in-spring-scotland");
@@ -132,16 +140,29 @@ class Game {
         checkSpawnFlower();
         checkWeedsToFlowers();
         checkFlowersForDeath();
-        new Timer(new Duration(milliseconds: 3430), tick);
+        checkBG();
+        syncHP();
+        new Timer(new Duration(milliseconds: 3430*2), tick);
+    }
+
+    void checkBG() {
+        if(hp > 0 && container.style.background != "url('images/background.png')" ) {
+            container.style.background = "url('images/background.png'";
+        }else if(hp < 0 && container.style.background != "url('images/BGoverlay.png'") {
+            container.style.background = "url('images/BGoverlay.png'";
+        }
     }
 
     void checkFlowersForDeath() {
-        print("checking ${flowers.length} flowers for death, odds are ${oddsFlowerDie}");
+        print("checking ${flowers.length} flowers for death, odds must be less than ${oddsWeedSpawn}");
       final Random rand = new Random();
       final List<Weed> flowersToRemove = new List<Weed>();
       for(final Weed flower in flowers) {
-          if(rand.nextDouble() < oddsFlowerDie) {
+          if(rand.nextDouble()*2 < oddsWeedSpawn) {
               flowersToRemove.add(flower);
+              flower.sprite.remove();
+          }else {
+              hp = Math.min(maxHP, hp +3);
           }
       }
       flowersToRemove.forEach((Weed w) => flowers.remove(w));
@@ -149,34 +170,41 @@ class Game {
 
     void checkWeedsToFlowers() {
         print("checking ${weeds.length} for flowerification");
-
         final List<Weed> weedsToRemove = new List<Weed>();
-      for(final Weed weed in weeds) {
-          if(weed.purified) {
-              flowers.add(weed);
-              weedsToRemove.add(weed);
-          }
-      }
-      weedsToRemove.forEach((Weed w) => weeds.remove(w));
+        for(final Weed weed in weeds) {
+              if(weed.purified) {
+                  flowers.add(weed);
+                  weedsToRemove.add(weed);
+              }else {
+                hp = Math.max(minHP, hp -1);
+              }
+        }
+        weedsToRemove.forEach((Weed w) => weeds.remove(w));
+    }
+
+    void purifiedFlower() {
+        hp = Math.min(maxHP, hp +155);
+        syncHP();
     }
 
     void checkSpawnWeed() {
         print("checking weeds for spawn, odds are ${oddsWeedSpawn}");
         final Random rand = new Random();
-        if(hp == 0 && rand.nextBool()) {
-            spawnWeed();
-        }else if(rand.nextDouble() < oddsWeedSpawn) {
+        if(rand.nextDouble() < oddsWeedSpawn) {
             spawnWeed();
         }
     }
 
     void checkSpawnFlower() {
+        print("checking flowers for spawn, odds must be more than are ${oddsWeedSpawn}");
         final Random rand = new Random();
-        if(hp == 0 && rand.nextBool()) {
-            spawnWeed(null, true);
-        }else if(rand.nextDouble() > oddsFlowerDie) {
+        if(hp > 0 && rand.nextDouble() > oddsWeedSpawn) {
             spawnWeed(null, true);
         }
+    }
+
+    void syncHP() {
+        hpMeter.text = "HP: $hp";
     }
 
 
