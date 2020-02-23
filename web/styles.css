@@ -8,6 +8,8 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: url('images/The_backest_of_backgrounds.png');
+  background-size: 300px;
   font-family: 'nunito', sans-serif;
   background-color: black;
   color: white;
