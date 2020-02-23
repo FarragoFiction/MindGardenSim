@@ -21,17 +21,15 @@ class Game {
     int maxWeeds = 113;
     int maxFlowers = 113;
 
-    double get oddsWeedSpawn{
-        if(hp-minHP == 0) return .5;
-        return 1/(hp-minHP);
-    }
+    //thanks to 1669 for helping me remember how linear algebra works
+    double get oddsWeedSpawn => -1* hp/226 + 0.5;
     double get oddsFlowerDie => 1/oddsWeedSpawn;
 
 
     //flowers last longer the better the hp
     //and weeds are more likely to spawn compared to inverse hp
     int hp = -113;
-    int minHP = -113;
+    int minHP = -112;
     int maxHP = 113;
 
     void display(Element parent) {
@@ -64,6 +62,8 @@ class Game {
 
     void startGameIntro() {
         clearGameScreen();
+        print("TODO: REMOVE THIS TICK");
+        tick();
         SoundController.playMusic("463903__burghrecords__birds-in-spring-scotland");
         TranscribedAudio.introAudio().display(container, tutorialIntroCallback);
     }
@@ -96,6 +96,7 @@ class Game {
 
     void tutoria3CallbackPart2() {
         TranscribedAudio.tutorialFinalAudio().display(container, null);
+        spawnWeed();
         tick();
     }
 
@@ -135,10 +136,11 @@ class Game {
     }
 
     void checkFlowersForDeath() {
+        print("checking ${flowers.length} flowers for death, odds are ${oddsFlowerDie}");
       final Random rand = new Random();
       final List<Weed> flowersToRemove = new List<Weed>();
       for(final Weed flower in flowers) {
-          if(rand.nextDouble() > oddsFlowerDie) {
+          if(rand.nextDouble() < oddsFlowerDie) {
               flowersToRemove.add(flower);
           }
       }
@@ -146,7 +148,9 @@ class Game {
     }
 
     void checkWeedsToFlowers() {
-      final List<Weed> weedsToRemove = new List<Weed>();
+        print("checking ${weeds.length} for flowerification");
+
+        final List<Weed> weedsToRemove = new List<Weed>();
       for(final Weed weed in weeds) {
           if(weed.purified) {
               flowers.add(weed);
@@ -157,10 +161,11 @@ class Game {
     }
 
     void checkSpawnWeed() {
+        print("checking weeds for spawn, odds are ${oddsWeedSpawn}");
         final Random rand = new Random();
         if(hp == 0 && rand.nextBool()) {
             spawnWeed();
-        }else if(rand.nextDouble() > oddsWeedSpawn) {
+        }else if(rand.nextDouble() < oddsWeedSpawn) {
             spawnWeed();
         }
     }

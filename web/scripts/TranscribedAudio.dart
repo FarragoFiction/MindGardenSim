@@ -90,7 +90,6 @@ class TranscribedAudio {
             });
 
             voiceOver.onTimeUpdate.listen((Event e) {
-                print(voiceOver.currentTime);
                 if(nextSegment != null && voiceOver.currentTime >= nextSegment.timeCodeStart) {
                     container.setInnerHtml(nextSegment.text);
                     index ++;
