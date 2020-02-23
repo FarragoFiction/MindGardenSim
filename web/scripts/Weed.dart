@@ -46,6 +46,7 @@ class Weed {
     void purify() {
         purified = true;
         lie.style.backgroundColor=null;
+        lie.text = phrase.text;
         sprite.src = "images/Flowers/$flowerLocation";
         lie.classes.add("purifiedtip"); //be pink and shit
         lie.classes.remove("lietip");
