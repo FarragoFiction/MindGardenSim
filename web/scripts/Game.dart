@@ -67,11 +67,10 @@ class Game {
     }
 
     void startGameIntro() {
+        print("Ghoul made the art for this, and realized that prospit dreamers see their futures in clouds...");
         clearGameScreen();
         hpMeter = new DivElement()..classes.add("hp");
         container.append(hpMeter);
-        print("TODO: REMOVE THIS TICK");
-        tick();
         SoundController.playMusic("463903__burghrecords__birds-in-spring-scotland");
         TranscribedAudio.introAudio().display(container, tutorialIntroCallback);
     }
@@ -183,14 +182,15 @@ class Game {
     }
 
     void purifiedFlower() {
-        hp = Math.min(maxHP, hp +155);
+        hp = Math.min(maxHP, hp +25);
         syncHP();
     }
 
     void checkSpawnWeed() {
         print("checking weeds for spawn, odds are ${oddsWeedSpawn}");
         final Random rand = new Random();
-        if(rand.nextDouble() < oddsWeedSpawn) {
+        //always slight chance of trouble
+        if(rand.nextDouble() < oddsWeedSpawn || rand.nextDouble()>0.1) {
             spawnWeed();
         }
     }

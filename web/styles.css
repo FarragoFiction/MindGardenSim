@@ -7,6 +7,8 @@ html, body {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
   padding: 0;
   font-family: 'nunito', sans-serif;
   background-color: black;
@@ -26,7 +28,41 @@ html, body {
     position: relative;
     margin-left: auto;
     margin-right: auto;
+    background:  url("images/CloudStrife/BGclouds25.png");
+    animation: scroll 10.0s linear infinite;
+
+}
+
+.skyBG2{
+    width: 720px;
+    height: 720px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
     background:  url("images/clounds.png");
+}
+
+.skyBG3{
+    width: 720px;
+    height: 720px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    background:  url("images/clounds.png");
+}
+
+.skyBG4{
+    width: 720px;
+    height: 720px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    background:  url("images/clounds.png");
+}
+
+@keyframes scroll{
+    0%{background-position: 0px; }
+    100%{background-position: 720px;}
 }
 
 @keyframes pulse {
