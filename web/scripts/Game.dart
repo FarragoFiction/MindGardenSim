@@ -131,7 +131,7 @@ class Game {
         checkSpawnFlower();
         checkWeedsToFlowers();
         checkFlowersForDeath();
-        new Timer(new Duration(milliseconds: 300), tick);
+        new Timer(new Duration(milliseconds: 3430), tick);
     }
 
     void checkFlowersForDeath() {
