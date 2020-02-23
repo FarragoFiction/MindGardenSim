@@ -15,12 +15,24 @@ class Game {
     //need to tick them down to get rid of them (but only if they are flowers)
     //also for reproduction
     List<Weed> weeds = new List<Weed>();
+    //purified weeds only plz
+    List<Weed> flowers = new List<Weed>();
+
+    int maxWeeds = 113;
+    int maxFlowers = 113;
+
+    double get oddsWeedSpawn{
+        if(hp-minHP == 0) return .5;
+        return 1/(hp-minHP);
+    }
+    double get oddsFlowerDie => 1/oddsWeedSpawn;
+
 
     //flowers last longer the better the hp
     //and weeds are more likely to spawn compared to inverse hp
-    int hp = -1300;
-    int minHP = -1300;
-    int maxHP = 1300;
+    int hp = -113;
+    int minHP = -113;
+    int maxHP = 113;
 
     void display(Element parent) {
         skyBG = new DivElement()..classes.add("skyBG");
@@ -84,11 +96,10 @@ class Game {
 
     void tutoria3CallbackPart2() {
         TranscribedAudio.tutorialFinalAudio().display(container, null);
-        //TODO start game loop here.
-        print("start game loop here");
+        tick();
     }
 
-    void spawnWeed([Weed weed]) {
+    void spawnWeed([Weed weed, bool flower=false]) {
         int maxY = 400;
         int minY = 280;
         int maxX = 680;
@@ -105,16 +116,61 @@ class Game {
                 weed = new BlackAndWhite();
             }
         }
+        if(flower) {
+            weed.purify();
+        }
         weeds.add(weed);
         weed.display(container,rand.nextIntRange(minX, maxX),rand.nextIntRange(minY, maxY));
     }
 
-    void startGameNext() {
-        //TODO start up a weed spawn loop and a flower tick loop
-        for(int i = 0; i<13; i++) {
+    /*
+       every tick loop, check
+     */
+    void tick() {
+        checkSpawnWeed();
+        checkSpawnFlower();
+        checkWeedsToFlowers();
+        checkFlowersForDeath();
+        new Timer(new Duration(milliseconds: 300), tick);
+    }
+
+    void checkFlowersForDeath() {
+      final Random rand = new Random();
+      final List<Weed> flowersToRemove = new List<Weed>();
+      for(final Weed flower in flowers) {
+          if(rand.nextDouble() > oddsFlowerDie) {
+              flowersToRemove.add(flower);
+          }
+      }
+      flowersToRemove.forEach((Weed w) => flowers.remove(w));
+    }
+
+    void checkWeedsToFlowers() {
+      final List<Weed> weedsToRemove = new List<Weed>();
+      for(final Weed weed in weeds) {
+          if(weed.purified) {
+              flowers.add(weed);
+              weedsToRemove.add(weed);
+          }
+      }
+      weedsToRemove.forEach((Weed w) => weeds.remove(w));
+    }
+
+    void checkSpawnWeed() {
+        final Random rand = new Random();
+        if(hp == 0 && rand.nextBool()) {
             spawnWeed();
+        }else if(rand.nextDouble() > oddsWeedSpawn) {
             spawnWeed();
-            spawnWeed();
+        }
+    }
+
+    void checkSpawnFlower() {
+        final Random rand = new Random();
+        if(hp == 0 && rand.nextBool()) {
+            spawnWeed(null, true);
+        }else if(rand.nextDouble() > oddsFlowerDie) {
+            spawnWeed(null, true);
         }
     }
 

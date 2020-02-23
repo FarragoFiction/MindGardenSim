@@ -32,7 +32,7 @@ class Weed {
         wrapper.style.top = "${y}px";
         wrapper.style.left = "${x}px";
         wrapper.style.zIndex = "$y";
-        lie = new DivElement()..text = brainLie..classes.add("tooltiptext");
+        lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
         wrapper.append(sprite);
         wrapper.append(lie);
         container.append(wrapper);
@@ -48,6 +48,7 @@ class Weed {
         sprite.src = "images/Flowers/$flowerLocation";
         lie.classes.add("purifiedtip"); //be pink and shit
         lie.classes.remove("lietip");
+        clickListener.cancel();
         if(callback != null) {
             print("callback is $callback, ${callback.runtimeType}");
             callback();
