@@ -7,8 +7,6 @@ html, body {
   width: 100%;
   height: 100%;
   margin: 0;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: black;
   padding: 0;
   font-family: 'nunito', sans-serif;
   background-color: black;
@@ -140,11 +138,14 @@ html, body {
 }
 
 .title{
-    text-align: center;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+   text-align: center;
 }
 
 .instructions{
     font-size: 22px;
+    color: black;
     text-align: center;
     padding: 50px;
     padding-top: 0px;
@@ -153,8 +154,10 @@ html, body {
 .hp{
     position: absolute;
     bottom: 10px;
+    -webkit-text-stroke-width: 2px;
+      -webkit-text-stroke-color: black;
     right: 10px;
-    font-size: 72px;
+    font-size: 48px;
 }
 
 .transcript{
@@ -169,6 +172,7 @@ html, body {
 
 .phrase{
     font-size: 24px;
+    color: black;
     font-weight: 800;
 }
 
@@ -190,6 +194,16 @@ html, body {
 .transcription{
     font-size: 28px;
     padding: 30px;
+    position: absolute;
+    bottom: 0px;
+    color: #05ffc9;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+.skipButton{
+    margin-top: 20px;
+    font-size: 18px;
 }
 
 .logo{

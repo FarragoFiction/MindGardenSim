@@ -74,8 +74,8 @@ class TranscribedAudio {
             container = new DivElement()..setInnerHtml(segments[index].text)..classes.add("transcription");
             playVoiceOver(audioLocation);
             parent.append(container);
-            ButtonElement button = new ButtonElement()..text = "Skip...";
-            parent.append(button);
+            ButtonElement button = new ButtonElement()..text = "Skip..."..classes.add('skipButton');
+            container.append(button);
             button.onClick.listen((Event e) {
                 SoundController.playSoundEffect("254286__jagadamba__mechanical-switch");
                 button.remove();
@@ -92,6 +92,7 @@ class TranscribedAudio {
             voiceOver.onTimeUpdate.listen((Event e) {
                 if(nextSegment != null && voiceOver.currentTime >= nextSegment.timeCodeStart) {
                     container.setInnerHtml(nextSegment.text);
+                    container.append(button);
                     index ++;
                 }
             });
