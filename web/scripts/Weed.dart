@@ -11,6 +11,7 @@ import 'Phrase.dart';
 class Weed {
     //TODO load phrase pairs from file
     static String namePlaceholder = "NAME";
+    String className = "weed";
     String brainLie;
     Phrase phrase;
     ImageElement sprite;
@@ -18,19 +19,21 @@ class Weed {
     bool purified = false;
     dynamic callback;
     StreamSubscription clickListener;
-
     Element lie;
 
     Weed(this.brainLie, String refutation, String imageLoc, String this.flowerLocation) {
         phrase = new Phrase(refutation.replaceAll(namePlaceholder,Game.instance.playerName));
         lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
-        sprite = new ImageElement(src: "images/Flowers/$imageLoc")..classes.add("weed");
+        sprite = new ImageElement(src: "images/Flowers/$imageLoc")..classes.add(className);
     }
 
-    void display(Element container, int x, int y) {
+    void display(Element container, int x, int y, bool animation) {
         //TODO make the hover text a tool tip. oh god.
 
         SpanElement wrapper = new SpanElement()..classes.add("tooltip")..classes.add("lietip");
+        if(animation) {
+            wrapper.classes.add("pulsing");
+        }
         wrapper.style.position = "absolute";
         wrapper.style.top = "${y}px";
         wrapper.style.left = "${x}px";
@@ -75,14 +78,21 @@ class BlackAndWhite extends Weed{
 
 
 class BWBoss extends Weed{
-    BWBoss() : super("I make mistakes, I hurt people and fail to meet obligations. I don't deserve to feel better.", "NAME, everyone makes mistakes sometimes. Occasional mistakes don't mean you should suffer forever. You're a living creature, and you deserve to find happiness.", "Pinwheel.gif","pinwheelpure.gif");
+    @override
+    String className = "bossWeed";
+
+    BWBoss() : super("I make mistakes, I hurt people and fail to meet obligations. I don't deserve to feel better.", "NAME, everyone makes mistakes sometimes. Occasional mistakes don't mean you should suffer forever. You're a living creature, and you deserve to find happiness.", "Pinwheel2.gif","pinwheelpure.gif");
 }
 
 class AbsBoss extends Weed{
+    @override
+    String className = "bossWeed";
     AbsBoss() : super("Every time I go easy on myself, I just make things harder on everyone else.  I never can get self care right, so why bother trying.", "Its easier to think about times self care didn't work, right now. Self care will make you stronger, and it will make you help others better. It's like a muscle, and you can only get better at it with practice. It's worth it to keep trying to say nice things to yourself, NAME.", "Stoney.png","flower1.gif");
 }
 
 class ClockBoss extends Weed{
-    ClockBoss() : super("Things are never going to get easier, I'm just setting myself up for disappointment if I go easy on myself.", "If you improve yourself, NAME, then things won't be so hard. If you keep tearing yourself down, things will stay hard. You can control the difficulty of the game.", "Ticker.gif","clockpure.gif");
+    @override
+    String className = "bossWeed";
+    ClockBoss() : super("Things are never going to get easier, I'm just setting myself up for disappointment if I go easy on myself.", "If you improve yourself, NAME, then things won't be so hard. If you keep tearing yourself down, things will stay hard. You can control the difficulty of the game.", "Ticker1.gif","clockpure.gif");
 }
 

@@ -102,7 +102,9 @@ class Game {
         hpMeter = new DivElement()..classes.add("hp");
         container.append(hpMeter);
         SoundController.playMusic("463903__burghrecords__birds-in-spring-scotland");
-        TranscribedAudio.introAudio().display(container, tutorialIntroCallback);
+        bossTime();
+        print("JR SAYS: turn tutorial back on plz");
+        //TranscribedAudio.introAudio().display(container, tutorialIntroCallback);
     }
 
     void tutorialIntroCallback() {
@@ -145,9 +147,13 @@ class Game {
             when bosses defeated = 3
             start tick back up
          */
+        Weed boss1 = spawnWeed(new AbsBoss(), false, 50,208, false);
+        Weed boss2 = spawnWeed(new BWBoss(), false, 250,200, false);
+        Weed boss3 = spawnWeed(new ClockBoss(), false, 500,208, false);
+
     }
 
-    void spawnWeed([Weed weed, bool flower=false]) {
+    Weed spawnWeed([Weed weed, bool flower=false, int x, int y, bool animation=true]) {
         checkBG();
         int maxY = 400;
         int minY = 280;
@@ -168,8 +174,14 @@ class Game {
         if(flower) {
             weed.purify();
         }
+        print("before randomizing x, x is $x");
+        x ??=rand.nextIntRange(minX, maxX);
+        print("after randomizing x, x is $x");
+
+        y ??=rand.nextIntRange(minY, maxY);
         weeds.add(weed);
-        weed.display(container,rand.nextIntRange(minX, maxX),rand.nextIntRange(minY, maxY));
+        weed.display(container,x,y,animation);
+        return weed;
     }
 
     /*

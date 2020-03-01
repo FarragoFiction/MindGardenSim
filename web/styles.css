@@ -123,6 +123,10 @@ html, body {
     position: absolute;
 }
 
+.bossWeed{
+    position: absolute;
+}
+
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
@@ -156,6 +160,9 @@ html, body {
     position: absolute;
     z-index: 13;
     height: 50px;
+}
+
+.pulsing{
     animation: pulse 2.0s steps(10) infinite;
 }
 
