@@ -62,13 +62,13 @@ class Weed {
 }
 //TODO leave all these things as the default values for them, but also have a constructor for a random thought from a file
 class OClock extends Weed{
-  OClock() : super("I’ll never amount to anything.", "If I get just a little bit stronger each day, eventually I will be completely different from who I am today.", "oclock.gif", "clockpure.png");
+  OClock() : super("I’ll never amount to anything.", "If you get just a little bit stronger each day, NAME, eventually you will be completely different from who you am today.", "oclock.gif", "clockpure.png");
 }
 
 class Absolute extends Weed{
-    Absolute() : super("You always mess up.", "I mess up more than I would like, but I'm trying to get better.", "stone.gif","flower1.gif");
+    Absolute() : super("I always mess up.", "You mess up more than you would like, NAME, but you're trying to get better.", "stone.gif","flower1.gif");
 }
 
 class BlackAndWhite extends Weed{
-    BlackAndWhite() : super("You messed up. You're worthless.", "Even if I mess up occasionally, I still have worth.", "blackandwhite.gif","pinwheelpure.gif");
+    BlackAndWhite() : super("I messed up. I'm worthless.", "Even if you mess up occasionally, you still have worth, NAME.", "blackandwhite.gif","pinwheelpure.gif");
 }
