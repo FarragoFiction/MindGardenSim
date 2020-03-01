@@ -59,9 +59,9 @@ class Game {
         stupidExtraDivForSkyShit.append(bgContainer);
         stupidExtraDivForSkyShit.append(container);
         stupidExtraDivForSkyShit.append(spookyOverlay);
-        ButtonElement start = new ButtonElement()..text = "Start"..classes.add("startbutton");
+        ButtonElement start = new ButtonElement()..text = "Ready, Valid Player?"..classes.add("startbutton");
         StreamSubscription listener;
-        listener = container.onClick.listen((Event e) {
+        listener = start.onClick.listen((Event e) {
             SoundController.playSoundEffect("254286__jagadamba__mechanical-switch");
             listener.cancel();
             startGameIntro();
@@ -71,9 +71,18 @@ class Game {
         DivElement div1 = new DivElement()..text = "Garden of the Mind"..classes.add("title");
         ImageElement image = new ImageElement(src: "images/mind.png")..classes.add("logo");
         DivElement div2 = new DivElement()..text = "This game uses both audio and text to provide encouragement and instructions. It uses the keyboard for typing."..classes.add("instructions");
+        DivElement div3 = new DivElement()..text = "Research shows that phrasing positive affirmations as advice to a friend can help.  Enter your own name, or a name of a friend you care about, here."..classes.add("instructions");
+        InputElement input = new InputElement()..value = "Valid Player";
+        input.onChange.listen((Event e) {
+            playerName = input.value;
+            start.text = "Ready, $playerName?";
+        });
         titleScreen.append(div1);
         titleScreen.append(image);
         titleScreen.append(div2);
+        titleScreen.append(div3);
+        titleScreen.append(input);
+
         titleScreen.append(start);
         container.append(titleScreen);
     }
