@@ -213,11 +213,18 @@ html, body {
     font-weight: 800;
 }
 
+input{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+
 .startbutton{
     border-radius: 8px;
     display: block;
     font-weight: 900;
-    font-size: 72px;
+    font-size: 48px;
     box-shadow: -10px 10px 20px #000000;
     width: auto;
     height: auto;
