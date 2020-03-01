@@ -11,6 +11,7 @@ import "package:CommonLib/Random.dart";
 class Game {
     Element stupidExtraDivForSkyShit;
     Element bgContainer;
+    Element fakeBG = querySelector("#fakebg");
     Element container;
     Element hpMeter;
     List<Element> skyShit = new List<Element>();
@@ -175,6 +176,9 @@ class Game {
 
     void checkBG() {
         bgContainer.style.filter="sepia(${oddsWeedSpawn*100}%)";
+        fakeBG.style.filter="sepia(${oddsWeedSpawn*100}%)";
+        fakeBG.style.opacity="${1-oddsWeedSpawn}";
+
         skyShit.forEach((Element e) => e.style.filter = "sepia(${oddsWeedSpawn*50}%)");
         spookyOverlay.style.opacity = "${oddsWeedSpawn/4}";
     }
