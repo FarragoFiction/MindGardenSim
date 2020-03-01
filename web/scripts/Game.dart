@@ -71,7 +71,7 @@ class Game {
         DivElement div1 = new DivElement()..text = "Garden of the Mind"..classes.add("title");
         ImageElement image = new ImageElement(src: "images/mind.png")..classes.add("logo");
         DivElement div2 = new DivElement()..text = "This game uses both audio and text to provide encouragement and instructions. It uses the keyboard for typing."..classes.add("instructions");
-        DivElement div3 = new DivElement()..setInnerHtml("<a target='_blank' href = 'https://www.psychologytoday.com/us/blog/the-athletes-way/201707/silent-third-person-self-talk-facilitates-emotion-regulation'>Research</a> shows that phrasing positive affirmations as advice to a friend can help.  Enter your own name, or a name of a friend you care about, here.", treeSanitizer: NodeTreeSanitizer.trusted)..classes.add("instructions");
+        DivElement div3 = new DivElement()..setInnerHtml("<a target='_blank' href = 'https://www.psychologytoday.com/us/blog/the-athletes-way/201707/silent-third-person-self-talk-facilitates-emotion-regulation'>Research</a> shows that phrasing positive, third person affirmations can help.  Enter your own name, (or a name of a friend you care about), here.", treeSanitizer: NodeTreeSanitizer.trusted)..classes.add("instructions");
         InputElement input = new InputElement()..value = "Valid Player";
         input.onInput.listen((Event e) {
             playerName = input.value;
