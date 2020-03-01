@@ -10,6 +10,7 @@ import 'Phrase.dart';
  */
 class Weed {
     //TODO load phrase pairs from file
+    static String namePlaceholder = "NAME";
     String brainLie;
     Phrase phrase;
     ImageElement sprite;
@@ -21,7 +22,7 @@ class Weed {
     Element lie;
 
     Weed(this.brainLie, String refutation, String imageLoc, String this.flowerLocation) {
-        phrase = new Phrase(refutation);
+        phrase = new Phrase(refutation.replaceAll(namePlaceholder,Game.instance.playerName));
         lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
         sprite = new ImageElement(src: "images/Flowers/$imageLoc")..classes.add("weed");
     }

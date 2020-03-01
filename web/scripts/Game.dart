@@ -10,6 +10,7 @@ import "package:CommonLib/Random.dart";
 
 class Game {
     Element stupidExtraDivForSkyShit;
+    String playerName = "JR";
     Element bgContainer;
     Element fakeBG = querySelector("#fakebg");
     Element container;

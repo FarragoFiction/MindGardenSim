@@ -33,6 +33,7 @@ html, body {
 
 .gamebg{
     position: absolute;
+    border: 3px solid black;
     width: 720px;
     height: 720px;
     background:  url("images/BGoverlay.png");
