@@ -19,6 +19,7 @@ class Game {
     Element hpMeter;
     List<Element> skyShit = new List<Element>();
     Element spookyOverlay;
+    bool bossesSpawned = false;
     static Game _instance;
     bool ticking = true;
     static Game get instance => _instance != null?_instance:new Game();
@@ -105,9 +106,7 @@ class Game {
         hpMeter = new DivElement()..classes.add("hp");
         container.append(hpMeter);
         SoundController.playMusic("463903__burghrecords__birds-in-spring-scotland");
-        bossTime();
-        print("JR SAYS: turn tutorial back on plz");
-        //TranscribedAudio.introAudio().display(container, tutorialIntroCallback);
+        TranscribedAudio.introAudio().display(container, tutorialIntroCallback);
     }
 
     void tutorialIntroCallback() {
@@ -149,6 +148,7 @@ class Game {
     }
 
     void bossTime() {
+        bossesSpawned = true;
         jrPrint("the bosses are meant to represent how sometimes your brain can fight against progress, give you anxiety or second thoughts about the recovery process, because change is scary and it would rather keep destroying you, because brain lies are jerks.");
         ticking = false;
         hp = -113;
@@ -163,10 +163,11 @@ class Game {
 
     void defeatBoss() {
         bossesDefeated ++;
+        hp = -113;
         if(bossesDefeated == 3) {
             jrPrint("defeating the bosses is basically giving yourself permission to keep recoverying, to stopping the process of punishing yourself for failure, to actively fight to acknowledge the good you're doing so you can keep doing it.");
             ticking = true;
-            hp = 13;
+            hp = 1;
             syncHP();
             tick();
         }
@@ -273,6 +274,9 @@ class Game {
 
     void syncHP() {
         hpMeter.text = "HP: $hp";
+        if(!bossesSpawned && hp >= 0) {
+            bossTime();
+        }
     }
 
 
