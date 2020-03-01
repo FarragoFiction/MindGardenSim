@@ -233,7 +233,7 @@ class Game {
               flowersToRemove.add(flower);
               flower.sprite.remove();
           }else {
-              hp = Math.min(maxHP, hp +3);
+              hp = Math.min(maxHP, hp +1);
           }
       }
       flowersToRemove.forEach((Weed w) => flowers.remove(w));
