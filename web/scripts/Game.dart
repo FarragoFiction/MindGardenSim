@@ -137,6 +137,16 @@ class Game {
         tick();
     }
 
+    void bossTime() {
+        /*
+        TODO:
+        spawn three boss flowers
+            each one of them has a callback
+            when bosses defeated = 3
+            start tick back up
+         */
+    }
+
     void spawnWeed([Weed weed, bool flower=false]) {
         checkBG();
         int maxY = 400;

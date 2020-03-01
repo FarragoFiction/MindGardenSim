@@ -72,3 +72,17 @@ class Absolute extends Weed{
 class BlackAndWhite extends Weed{
     BlackAndWhite() : super("I messed up. I'm worthless.", "Even if you mess up occasionally, you still have worth, NAME.", "blackandwhite.gif","pinwheelpure.gif");
 }
+
+
+class BWBoss extends Weed{
+    BWBoss() : super("I make mistakes, I hurt people and fail to meet obligations. I don't deserve to feel better.", "NAME, everyone makes mistakes sometimes. Occasional mistakes don't mean you should suffer forever. You're a living creature, and you deserve to find happiness.", "Pinwheel.gif","pinwheelpure.gif");
+}
+
+class AbsBoss extends Weed{
+    AbsBoss() : super("Every time I go easy on myself, I just make things harder on everyone else.  I never can get self care right, so why bother trying.", "Its easier to think about times self care didn't work, right now. Self care will make you stronger, and it will make you help others better. It's like a muscle, and you can only get better at it with practice. It's worth it to keep trying to say nice things to yourself, NAME.", "Stoney.png","flower1.gif");
+}
+
+class ClockBoss extends Weed{
+    ClockBoss() : super("Things are never going to get easier, I'm just setting myself up for disappointment if I go easy on myself.", "If you improve yourself, NAME, then things won't be so hard. If you keep tearing yourself down, things will stay hard. You can control the difficulty of the game.", "Ticker.gif","clockpure.gif");
+}
+
