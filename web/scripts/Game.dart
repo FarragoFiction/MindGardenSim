@@ -7,6 +7,7 @@ import 'TranscribedAudio.dart';
 import 'TranscriptionSegment.dart';
 import "Weed.dart";
 import "package:CommonLib/Random.dart";
+import "package:CommonLib/Logging.dart";
 
 class Game {
     Element stupidExtraDivForSkyShit;
@@ -14,10 +15,12 @@ class Game {
     Element bgContainer;
     Element fakeBG = querySelector("#fakebg");
     Element container;
+    int bossesDefeated = 0;
     Element hpMeter;
     List<Element> skyShit = new List<Element>();
     Element spookyOverlay;
     static Game _instance;
+    bool ticking = true;
     static Game get instance => _instance != null?_instance:new Game();
 
     //need to tick them down to get rid of them (but only if they are flowers)
@@ -97,7 +100,7 @@ class Game {
     }
 
     void startGameIntro() {
-        print("Ghoul made the art for this, and realized that prospit dreamers see their futures in clouds...");
+        jrPrint("Ghoul made the art for this, and realized that prospit dreamers see their futures in clouds...");
         clearGameScreen();
         hpMeter = new DivElement()..classes.add("hp");
         container.append(hpMeter);
@@ -139,18 +142,34 @@ class Game {
         tick();
     }
 
-    void bossTime() {
-        /*
-        TODO:
-        spawn three boss flowers
-            each one of them has a callback
-            when bosses defeated = 3
-            start tick back up
-         */
-        Weed boss1 = spawnWeed(new AbsBoss(), false, 50,208, false);
-        Weed boss2 = spawnWeed(new BWBoss(), false, 250,200, false);
-        Weed boss3 = spawnWeed(new ClockBoss(), false, 500,208, false);
+    void jrPrint(String text) {
+        String color = "#05ffc9";
+        String consortCss = "font-family: 'Nunito', Courier, monospace;color:${color};font-size: 13px;font-weight: bold;";
+        fancyPrint("JR: $text", consortCss);
+    }
 
+    void bossTime() {
+        jrPrint("the bosses are meant to represent how sometimes your brain can fight against progress, give you anxiety or second thoughts about the recovery process, because change is scary and it would rather keep destroying you, because brain lies are jerks.");
+        ticking = false;
+        hp = -113;
+        syncHP();
+        Weed boss1 = spawnWeed(new AbsBoss(), false, 50,208, false);
+        boss1.callback = defeatBoss;
+        Weed boss2 = spawnWeed(new BWBoss(), false, 250,200, false);
+        boss2.callback = defeatBoss;
+        Weed boss3 = spawnWeed(new ClockBoss(), false, 500,208, false);
+        boss3.callback = defeatBoss;
+    }
+
+    void defeatBoss() {
+        bossesDefeated ++;
+        if(bossesDefeated == 3) {
+            jrPrint("defeating the bosses is basically giving yourself permission to keep recoverying, to stopping the process of punishing yourself for failure, to actively fight to acknowledge the good you're doing so you can keep doing it.");
+            ticking = true;
+            hp = 13;
+            syncHP();
+            tick();
+        }
     }
 
     Weed spawnWeed([Weed weed, bool flower=false, int x, int y, bool animation=true]) {
@@ -174,10 +193,7 @@ class Game {
         if(flower) {
             weed.purify();
         }
-        print("before randomizing x, x is $x");
         x ??=rand.nextIntRange(minX, maxX);
-        print("after randomizing x, x is $x");
-
         y ??=rand.nextIntRange(minY, maxY);
         weeds.add(weed);
         weed.display(container,x,y,animation);
@@ -188,13 +204,15 @@ class Game {
        every tick loop, check
      */
     void tick() {
-        checkSpawnWeed();
-        checkSpawnFlower();
-        checkWeedsToFlowers();
-        checkFlowersForDeath();
-        checkBG();
-        syncHP();
-        new Timer(new Duration(milliseconds: 3430*2), tick);
+        if(ticking) {
+            checkSpawnWeed();
+            checkSpawnFlower();
+            checkWeedsToFlowers();
+            checkFlowersForDeath();
+            checkBG();
+            syncHP();
+            new Timer(new Duration(milliseconds: 3430 * 2), tick);
+        }
     }
 
     void checkBG() {
@@ -207,7 +225,6 @@ class Game {
     }
 
     void checkFlowersForDeath() {
-        print("checking ${flowers.length} flowers for death, odds must be less than ${oddsWeedSpawn}");
       final Random rand = new Random();
       final List<Weed> flowersToRemove = new List<Weed>();
       for(final Weed flower in flowers) {
@@ -222,7 +239,6 @@ class Game {
     }
 
     void checkWeedsToFlowers() {
-        print("checking ${weeds.length} for flowerification");
         final List<Weed> weedsToRemove = new List<Weed>();
         for(final Weed weed in weeds) {
               if(weed.purified) {
@@ -241,7 +257,6 @@ class Game {
     }
 
     void checkSpawnWeed() {
-        print("checking weeds for spawn, odds are ${oddsWeedSpawn}");
         final Random rand = new Random();
         //always slight chance of trouble
         if(rand.nextDouble() < oddsWeedSpawn || rand.nextDouble()>0.1) {
@@ -250,7 +265,6 @@ class Game {
     }
 
     void checkSpawnFlower() {
-        print("checking flowers for spawn, odds must be more than are ${oddsWeedSpawn}");
         final Random rand = new Random();
         if(hp > 0 && rand.nextDouble() > oddsWeedSpawn) {
             spawnWeed(null, true);

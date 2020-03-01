@@ -81,7 +81,7 @@ class BWBoss extends Weed{
     @override
     String className = "bossWeed";
 
-    BWBoss() : super("I make mistakes, I hurt people and fail to meet obligations. I don't deserve to feel better.", "NAME, everyone makes mistakes sometimes. Occasional mistakes don't mean you should suffer forever. You're a living creature, and you deserve to find happiness.", "Pinwheel2.gif","pinwheelpure.gif");
+    BWBoss() : super("I make mistakes, I hurt people and fail to meet obligations. I don't deserve to feel better.", "NAME, everyone makes mistakes sometimes. Occasional mistakes don't mean you should suffer forever. You're a living creature, and you deserve to find happiness.", "Pinwheel2.gif","GoodPinwheels.gif");
 }
 
 class AbsBoss extends Weed{
@@ -93,6 +93,6 @@ class AbsBoss extends Weed{
 class ClockBoss extends Weed{
     @override
     String className = "bossWeed";
-    ClockBoss() : super("Things are never going to get easier, I'm just setting myself up for disappointment if I go easy on myself.", "If you improve yourself, NAME, then things won't be so hard. If you keep tearing yourself down, things will stay hard. You can control the difficulty of the game.", "Ticker1.gif","clockpure.gif");
+    ClockBoss() : super("Things are never going to get easier, I'm just setting myself up for disappointment if I go easy on myself.", "If you improve yourself, NAME, then things won't be so hard. If you keep tearing yourself down, things will stay hard. You can control the difficulty of the game.", "Ticker1.gif","clockpure.png");
 }
 
