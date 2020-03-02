@@ -190,15 +190,14 @@ class Game {
         int maxX = 680;
         int minX = 0;
         Random rand = new Random();
-        //TODO randomize spawn location
         double number = rand.nextDouble();
         if(weed == null) {
             if (number > .5) {
-                weed = new Absolute();
+                weed = new Absolute.fromRandom();
             } else if (number > .3) {
-                weed = new OClock();
+                weed = new OClock.fromRandom();
             } else {
-                weed = new BlackAndWhite();
+                weed = new BlackAndWhite.fromRandom();
             }
         }
         if(flower) {

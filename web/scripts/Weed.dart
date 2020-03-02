@@ -1,5 +1,7 @@
 import 'dart:html';
 import 'dart:async';
+import 'package:CommonLib/Random.dart';
+
 import 'Game.dart';
 import 'Phrase.dart';
 import 'package:http/http.dart' as http;
@@ -21,6 +23,10 @@ abstract class Weed {
     dynamic callback;
     StreamSubscription clickListener;
     Element lie;
+
+    Weed.fromConstructor(String imageLoc, String this.flowerLocation){
+        sprite = new ImageElement(src: "images/Flowers/$imageLoc")..classes.add(className);
+    }
 
     Weed(this.brainLie, String refutation, String imageLoc, String this.flowerLocation) {
         phrase = new Phrase(refutation.replaceAll(namePlaceholder,Game.instance.playerName));
@@ -76,6 +82,13 @@ class OClock extends Weed{
     static List<List<String>> possiblePhrases = new List<List<String>>();
   OClock() : super("I’ll never amount to anything.", "If you get just a little bit stronger each day, NAME, eventually you will be completely different from who you are today.", "oclock.gif", "clockpure.png");
 
+  OClock.fromRandom() : super.fromConstructor("oclock.gif", "clockpure.png"){
+       Random rand = new Random();
+       List<String> choice = rand.pickFrom(possiblePhrases);
+       brainLie = choice[0];
+       phrase = new Phrase(choice[1].replaceAll(Weed.namePlaceholder,Game.instance.playerName));
+       lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
+    }
 
   static Future<Null> slurpPhrases() async {
       String data = await http.read('Thoughts/oclock.csv');
@@ -95,6 +108,13 @@ class Absolute extends Weed{
 
     Absolute() : super("I always mess up.", "You mess up more than you would like, NAME, but you're trying to get better.", "stone.gif","flower1.gif");
 
+    Absolute.fromRandom() : super.fromConstructor("stone.gif","flower1.gif"){
+        Random rand = new Random();
+        List<String> choice = rand.pickFrom(possiblePhrases);
+        brainLie = choice[0];
+        phrase = new Phrase(choice[1].replaceAll(Weed.namePlaceholder,Game.instance.playerName));
+        lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
+    }
     static Future<Null> slurpPhrases() async {
         String data = await http.read('Thoughts/absolutes.csv');
         List<String> lines = data.split("\n");
@@ -113,6 +133,13 @@ class BlackAndWhite extends Weed{
 
     BlackAndWhite() : super("I messed up. I'm worthless.", "Even if you mess up occasionally, you still have worth, NAME.", "blackandwhite.gif","pinwheelpure.gif");
 
+    BlackAndWhite.fromRandom() : super.fromConstructor("blackandwhite.gif","pinwheelpure.gif"){
+        Random rand = new Random();
+        List<String> choice = rand.pickFrom(possiblePhrases);
+        brainLie = choice[0];
+        phrase = new Phrase(choice[1].replaceAll(Weed.namePlaceholder,Game.instance.playerName));
+        lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
+    }
     static Future<Null> slurpPhrases() async {
         String data = await http.read('Thoughts/blackandwhite.csv');
         List<String> lines = data.split("\n");
