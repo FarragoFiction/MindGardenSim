@@ -48,10 +48,12 @@ abstract class Weed {
         wrapper.append(sprite);
         wrapper.append(lie);
         container.append(wrapper);
-        clickListener = wrapper.onClick.listen((Event e) {
-            phrase.display(container, purify);
-            clickListener.cancel();
-        });
+        if(!purified) {
+            clickListener = wrapper.onClick.listen((Event e) {
+                phrase.display(container, purify);
+                clickListener.cancel();
+            });
+        }
     }
 
     static Future<Null> slurpPhrases() async {
