@@ -11,7 +11,7 @@ import "package:CommonLib/Logging.dart";
 
 class Game {
     Element stupidExtraDivForSkyShit;
-    String playerName = "JR";
+    String playerName = "Valid Player";
     Element bgContainer;
     Element fakeBG = querySelector("#fakebg");
     Element container;
