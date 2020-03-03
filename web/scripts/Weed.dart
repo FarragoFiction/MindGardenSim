@@ -1,10 +1,9 @@
 import 'dart:html';
 import 'dart:async';
 import 'package:CommonLib/Random.dart';
-
+import 'package:LoaderLib/Loader.dart';
 import 'Game.dart';
 import 'Phrase.dart';
-import 'package:http/http.dart' as http;
 
 /*
    needs to render self on screen
@@ -93,14 +92,7 @@ class OClock extends Weed{
     }
 
   static Future<Null> slurpPhrases() async {
-      String data = await http.read('Thoughts/oclock.csv');
-      List<String> lines = data.split("\n");
-      for(String line in lines) {
-          if(line.trim().isNotEmpty) {
-              List<String> parts = line.split(",");
-              possiblePhrases.add(parts);
-          }
-      }
+      possiblePhrases = await Loader.getResource('Thoughts/oclock.csv');
       print("Phrases loaded were $possiblePhrases ");
   }
 }
@@ -118,14 +110,7 @@ class Absolute extends Weed{
         lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
     }
     static Future<Null> slurpPhrases() async {
-        String data = await http.read('Thoughts/absolutes.csv');
-        List<String> lines = data.split("\n");
-        for(String line in lines) {
-            if(line.trim().isNotEmpty) {
-                List<String> parts = line.split(",");
-                possiblePhrases.add(parts);
-            }
-        }
+        possiblePhrases = await Loader.getResource('Thoughts/absolutes.csv');
         print("Phrases loaded were $possiblePhrases ");
     }
 }
@@ -143,14 +128,7 @@ class BlackAndWhite extends Weed{
         lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
     }
     static Future<Null> slurpPhrases() async {
-        String data = await http.read('Thoughts/blackandwhite.csv');
-        List<String> lines = data.split("\n");
-        for(String line in lines) {
-            if(line.trim().isNotEmpty) {
-                List<String> parts = line.split(",");
-                possiblePhrases.add(parts);
-            }
-        }
+        possiblePhrases = await Loader.getResource('Thoughts/blackandwhite.csv');
         print("Phrases loaded were $possiblePhrases ");
     }
 }
