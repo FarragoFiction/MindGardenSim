@@ -12,9 +12,10 @@ abstract class PhraseSettingsBox {
         //TODO display checkbox, on click of text or checkbox, remove from list.
         final DivElement container = new DivElement()..classes.add("phraseSettings");
         parent.append(container);
+        container.append(new DivElement()..text = "It's okay if some of these phrases are too hard to encounter when you're not expecting it. It's okay, too, if you think you don't need to practice fighting these thoughts. You can customize your garden however you like."..classes.add("settingsUberInstructions"));
         displaySection(container, "OClock Lies/Truths", OClock.allPhrases);
         displaySection(container, "Absolute Lies/Truths", Absolute.allPhrases);
-        displaySection(container, "BlackAndWhite Lies/Truths", OClock.allPhrases);
+        displaySection(container, "BlackAndWhite Lies/Truths", BlackAndWhite.allPhrases);
 
     }
 

@@ -213,6 +213,19 @@ html, body {
     font-weight: 800;
 }
 
+.phraseSettings{
+    width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.settingsUberInstructions{
+    padding: 5px;
+    border: 1px solid white;
+    margin: 10px;
+
+}
+
 .phraseSettingSection{
     border: 1px solid white;
     margin: 10px;
