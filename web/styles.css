@@ -233,7 +233,7 @@ html, body {
 
 .settingsSectionLabel{
     font-size: 28px;
-    font-decoration: underline;
+    text-decoration: underline;
     padding: 5px;
 }
 
