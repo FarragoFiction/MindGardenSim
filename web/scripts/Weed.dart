@@ -56,9 +56,9 @@ abstract class Weed {
     }
 
     static Future<Null> slurpPhrases() async {
-        OClock.slurpPhrases();
-        BlackAndWhite.slurpPhrases();
-        Absolute.slurpPhrases();
+        await OClock.slurpPhrases();
+        await BlackAndWhite.slurpPhrases();
+        await Absolute.slurpPhrases();
     }
 
 
@@ -82,7 +82,7 @@ abstract class Weed {
 class OClock extends Weed{
     static List<List<String>> possiblePhrases = new List<List<String>>();
     static List<List<String>> allPhrases = new List<List<String>>();
-    
+
     OClock() : super("I’ll never amount to anything.", "If you get just a little bit stronger each day, NAME, eventually you will be completely different from who you are today.", "oclock.gif", "clockpure.png");
 
   OClock.fromRandom() : super.fromConstructor("oclock.gif", "clockpure.png"){
@@ -96,7 +96,7 @@ class OClock extends Weed{
   static Future<Null> slurpPhrases() async {
       possiblePhrases = await Loader.getResource('Thoughts/oclock.csv');
       allPhrases = new List<List<String>>.from(possiblePhrases);
-      print("Phrases loaded were $possiblePhrases ");
+      print("Phrases loaded were $allPhrases ");
   }
 }
 

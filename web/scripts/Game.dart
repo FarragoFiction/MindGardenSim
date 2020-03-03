@@ -45,7 +45,6 @@ class Game {
 
     Game() {
         _instance = this;
-        OClock.slurpPhrases();
     }
 
     void display(Element parent) {
