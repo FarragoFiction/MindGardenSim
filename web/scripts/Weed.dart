@@ -81,7 +81,9 @@ abstract class Weed {
 //TODO leave all these things as the default values for them, but also have a constructor for a random thought from a file
 class OClock extends Weed{
     static List<List<String>> possiblePhrases = new List<List<String>>();
-  OClock() : super("I’ll never amount to anything.", "If you get just a little bit stronger each day, NAME, eventually you will be completely different from who you are today.", "oclock.gif", "clockpure.png");
+    static List<List<String>> allPhrases = new List<List<String>>();
+    
+    OClock() : super("I’ll never amount to anything.", "If you get just a little bit stronger each day, NAME, eventually you will be completely different from who you are today.", "oclock.gif", "clockpure.png");
 
   OClock.fromRandom() : super.fromConstructor("oclock.gif", "clockpure.png"){
        Random rand = new Random();
@@ -93,12 +95,14 @@ class OClock extends Weed{
 
   static Future<Null> slurpPhrases() async {
       possiblePhrases = await Loader.getResource('Thoughts/oclock.csv');
+      allPhrases = new List<List<String>>.from(possiblePhrases);
       print("Phrases loaded were $possiblePhrases ");
   }
 }
 
 class Absolute extends Weed{
     static List<List<String>> possiblePhrases = new List<List<String>>();
+    static List<List<String>> allPhrases = new List<List<String>>();
 
     Absolute() : super("I always mess up.", "You mess up more than you would like, NAME, but you're trying to get better.", "stone.gif","flower1.gif");
 
@@ -111,12 +115,14 @@ class Absolute extends Weed{
     }
     static Future<Null> slurpPhrases() async {
         possiblePhrases = await Loader.getResource('Thoughts/absolutes.csv');
+        allPhrases = new List<List<String>>.from(possiblePhrases);
         print("Phrases loaded were $possiblePhrases ");
     }
 }
 
 class BlackAndWhite extends Weed{
     static List<List<String>> possiblePhrases = new List<List<String>>();
+    static List<List<String>> allPhrases = new List<List<String>>();
 
     BlackAndWhite() : super("I messed up. I'm worthless.", "Even if you mess up occasionally, you still have worth, NAME.", "blackandwhite.gif","pinwheelpure.gif");
 
@@ -129,6 +135,7 @@ class BlackAndWhite extends Weed{
     }
     static Future<Null> slurpPhrases() async {
         possiblePhrases = await Loader.getResource('Thoughts/blackandwhite.csv');
+        allPhrases = new List<List<String>>.from(possiblePhrases);
         print("Phrases loaded were $possiblePhrases ");
     }
 }
