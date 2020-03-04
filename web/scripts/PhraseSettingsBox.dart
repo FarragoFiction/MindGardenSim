@@ -19,7 +19,7 @@ abstract class PhraseSettingsBox {
 
     }
 
-    static void displaySection(Element parent, String label, List<List<String>> phrases) {
+    static void displaySection(Element parent, String label, List<List<dynamic>> phrases) {
         final DivElement container = new DivElement()..classes.add("phraseSettingSection");
         parent.append(container);
         print("going to display section $label, with phrases $phrases");
@@ -27,7 +27,7 @@ abstract class PhraseSettingsBox {
         final DivElement instructionElement = new DivElement()..text = "Choose Which Phrases To Encounter"..classes.add("settingsInstruction");
         container.append(titleElement);
         container.append(instructionElement);
-        for(final List<String> phrase in phrases) {
+        for(final List<dynamic> phrase in phrases) {
             print("phrase is $phrase");
             final DivElement phraseContainer = new DivElement()..classes.add("phraseContainer");
             container.append(phraseContainer);
@@ -49,7 +49,7 @@ abstract class PhraseSettingsBox {
         }
     }
 
-    static void handleClick(String label, List<String> phrase, CheckboxInputElement checkbox, Element phraseContainer ) {
+    static void handleClick(String label, List<dynamic> phrase, CheckboxInputElement checkbox, Element phraseContainer ) {
         if(label.contains("OClock")){
             if(OClock.possiblePhrases.contains(phrase)) {
                 OClock.possiblePhrases.remove(phrase);
