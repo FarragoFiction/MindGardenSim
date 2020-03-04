@@ -159,7 +159,7 @@ class BWBoss extends Weed{
 class AbsBoss extends Weed{
     @override
     String className = "bossWeed";
-    AbsBoss() : super("Every time I go easy on myself, I just make things harder on everyone else.  I never can get self care right, so why bother trying.", "Its easier to think about times self care didn't work, right now. Self care will make you stronger, and it will make you help others better. It's like a muscle, and you can only get better at it with practice. It's worth it to keep trying to say nice things to yourself, NAME.", "Stoney.png","flower1.gif");
+    AbsBoss() : super("Every time I go easy on myself, I just make things harder on everyone else.  I never can get self care right, so why bother trying.", "Its easier to think about times self care didn't work, right now. Self care will make you stronger, and it will make you help others better. It's like a muscle, and you can only get better at it with practice. It's worth it to keep trying to say nice things to yourself, NAME.", "Stoney.png","GoodStoney.png");
     @override
     Future<Null> slurpPhrases() {
         //does nothing
