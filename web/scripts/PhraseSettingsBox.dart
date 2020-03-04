@@ -29,12 +29,17 @@ abstract class PhraseSettingsBox {
         container.append(instructionElement);
         for(final List<String> phrase in phrases) {
             print("phrase is $phrase");
-            DivElement phraseContainer = new DivElement()..classes.add("phraseContainer");
+            final DivElement phraseContainer = new DivElement()..classes.add("phraseContainer");
             container.append(phraseContainer);
             final CheckboxInputElement check = new CheckboxInputElement()..classes.add("phraseCheckbox");
+            check.checked = true;
             final DivElement blank = new DivElement();
             final DivElement labelLie = new DivElement()..text = "Lie: ${phrase[0]}"..classes.add("settingsLie");
-            final DivElement labelTruth = new DivElement()..text = "Truth: ${phrase[1]}"..classes.add("settingsTruth");;
+            final DivElement labelTruth = new DivElement()..text = "Truth: ${phrase[1]}"..classes.add("settingsTruth");
+
+            phraseContainer.onClick.listen((Event e) {
+                handleClick(label, phrase, check, phraseContainer);
+            });
 
             phraseContainer.append(check);
             phraseContainer.append(labelLie);
@@ -43,5 +48,40 @@ abstract class PhraseSettingsBox {
 
         }
     }
+
+    static void handleClick(String label, List<String> phrase, CheckboxInputElement checkbox, Element phraseContainer ) {
+        if(label.contains("OClock")){
+            if(OClock.possiblePhrases.contains(phrase)) {
+                OClock.possiblePhrases.remove(phrase);
+                checkbox.checked = false;
+                phraseContainer.style.opacity = "0.3";
+            }else {
+                OClock.possiblePhrases.add(phrase);
+                checkbox.checked = true;
+                phraseContainer.style.opacity = "1.0";
+            }
+        }else if(label.contains("Absolute")){
+            if(Absolute.possiblePhrases.contains(phrase)) {
+                OClock.possiblePhrases.remove(phrase);
+                checkbox.checked = false;
+                phraseContainer.style.opacity = "0.3";
+            }else {
+                Absolute.possiblePhrases.add(phrase);
+                checkbox.checked = true;
+                phraseContainer.style.opacity = "1.0";
+            }
+        }else if(label.contains("BlackAndWhite")){
+            if(BlackAndWhite.possiblePhrases.contains(phrase)) {
+                BlackAndWhite.possiblePhrases.remove(phrase);
+                checkbox.checked = false;
+                phraseContainer.style.opacity = "0.3";
+            }else {
+                BlackAndWhite.possiblePhrases.add(phrase);
+                checkbox.checked = true;
+                phraseContainer.style.opacity = "1.0";
+            }
+        }
+    }
+
 
 }

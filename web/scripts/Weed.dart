@@ -88,6 +88,7 @@ class OClock extends Weed{
   OClock.fromRandom() : super.fromConstructor("oclock.gif", "clockpure.png"){
        Random rand = new Random();
        List<String> choice = rand.pickFrom(possiblePhrases);
+       choice ??= <String>["I feel bad for turning off all the phrases.","You are completely valid, NAME. Turning off all the phrases is the right thing to do if they're all too much, or if you're curious."];
        brainLie = choice[0];
        phrase = new Phrase(choice[1].replaceAll(Weed.namePlaceholder,Game.instance.playerName));
        lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
@@ -109,6 +110,7 @@ class Absolute extends Weed{
     Absolute.fromRandom() : super.fromConstructor("stone.gif","flower1.gif"){
         Random rand = new Random();
         List<String> choice = rand.pickFrom(possiblePhrases);
+        choice ??= <String>["I feel bad for turning off all the phrases.","You are completely valid, NAME. Turning off all the phrases is the right thing to do if they're all too much, or if you're curious."];
         brainLie = choice[0];
         phrase = new Phrase(choice[1].replaceAll(Weed.namePlaceholder,Game.instance.playerName));
         lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
@@ -129,6 +131,7 @@ class BlackAndWhite extends Weed{
     BlackAndWhite.fromRandom() : super.fromConstructor("blackandwhite.gif","pinwheelpure.gif"){
         Random rand = new Random();
         List<String> choice = rand.pickFrom(possiblePhrases);
+        choice ??= <String>["I feel bad for turning off all the phrases.","You are completely valid, NAME. Turning off all the phrases is the right thing to do if they're all too much, or if you're curious."];
         brainLie = choice[0];
         phrase = new Phrase(choice[1].replaceAll(Weed.namePlaceholder,Game.instance.playerName));
         lie = new DivElement()..text = purified?phrase.text:brainLie..classes.add("tooltiptext");
