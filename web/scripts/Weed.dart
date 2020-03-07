@@ -170,7 +170,7 @@ class AbsBoss extends Weed{
 class ClockBoss extends Weed{
     @override
     String className = "bossWeed";
-    ClockBoss() : super("Things are never going to get easier, I'm just setting myself up for disappointment if I go easy on myself.", "If you improve yourself, NAME, then things won't be so hard. If you keep tearing yourself down, things will stay hard. You can control the difficulty of the game.", "Ticker1.gif","clockpure.png");
+    ClockBoss() : super("Things are never going to get easier, I'm just setting myself up for disappointment if I go easy on myself.", "If you improve yourself, NAME, then things won't be so hard. If you keep tearing yourself down, things will stay hard. You can control the difficulty of the game.", "Ticker1.gif","GoodTicker.gif");
     @override
     Future<Null> slurpPhrases() {
         //does nothing
