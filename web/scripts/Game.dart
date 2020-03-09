@@ -114,7 +114,8 @@ class Game {
         clearGameScreen();
         hpMeter = new DivElement()..classes.add("hp");
         container.append(hpMeter);
-        SoundController.playMusic("463903__burghrecords__birds-in-spring-scotland");
+        SoundController.playMusic("Flowersim_Sadness");
+
         TranscribedAudio.introAudio().display(container, tutorialIntroCallback);
     }
 
@@ -179,6 +180,8 @@ class Game {
             hp = 1;
             syncHP();
             tick();
+            SoundController.playMusic("Flowersim_Joy");
+            SoundController.playBirds("463903__burghrecords__birds-in-spring-scotland");
         }
     }
 

@@ -106,5 +106,7 @@ class TranscribedAudio {
             if(voiceOver.canPlayType("audio/mpeg").isNotEmpty) voiceOver.src = "Sounds/${locationWithoutExtension}.mp3";
             if(voiceOver.canPlayType("audio/ogg").isNotEmpty) voiceOver.src = "Sounds/${locationWithoutExtension}.ogg";
             voiceOver.play();
+            SoundController.nearlyMuteMusic();
+            voiceOver.onPause.listen((Event e) => SoundController.unNearlyMuteMusic());
         }
 }
