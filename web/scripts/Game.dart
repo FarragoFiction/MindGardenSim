@@ -264,7 +264,7 @@ class Game {
     }
 
     void purifiedFlower() {
-        hp = Math.min(maxHP, hp +25);
+        hp = Math.min(maxHP, hp +33);
         syncHP();
     }
 
