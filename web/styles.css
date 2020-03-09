@@ -254,6 +254,33 @@ html, body {
       padding: 10px;
 }
 
+a{
+    color: deepskyblue;
+}
+
+a:visited{
+    color: deepskyblue;
+}
+
+.creditsHeader{
+    width: 720px;
+    margin-right:auto;
+        margin-left: auto;
+    padding: 10px;
+     font-size: 28px;
+        text-decoration: underline;
+}
+
+.credits{
+    display: grid;
+    width: 720px;
+    margin-right:auto;
+    margin-left: auto;
+     grid-template-columns: 1fr 1fr;
+     grid-gap: 10px;
+      padding: 10px;
+}
+
 .phraseContainer:nth-child(odd){
     background: grey;
 }

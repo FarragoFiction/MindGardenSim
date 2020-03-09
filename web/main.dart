@@ -3,6 +3,7 @@ import 'dart:html';
 import 'scripts/Game.dart';
 import 'scripts/Phrase.dart';
 import 'scripts/PhraseSettingsBox.dart';
+import 'scripts/CreditsBox.dart';
 import 'scripts/Weed.dart';
 
 void main() async {
@@ -11,6 +12,8 @@ void main() async {
   game.display(querySelector('#output'));
   await Weed.slurpPhrases();
   PhraseSettingsBox.display(querySelector('#output'));
+  CreditsBox.display(querySelector('#output'));
+
   //Phrase.nextPhrase().display(querySelector('#output'));
 }
 
