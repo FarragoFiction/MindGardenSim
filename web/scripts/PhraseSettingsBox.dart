@@ -62,7 +62,7 @@ abstract class PhraseSettingsBox {
             }
         }else if(label.contains("Absolute")){
             if(Absolute.possiblePhrases.contains(phrase)) {
-                OClock.possiblePhrases.remove(phrase);
+                Absolute.possiblePhrases.remove(phrase);
                 checkbox.checked = false;
                 phraseContainer.style.opacity = "0.3";
             }else {
