@@ -13,10 +13,12 @@ class Game {
     Element stupidExtraDivForSkyShit;
     String playerName = "Valid Player";
     Element bgContainer;
+    bool skipTutorial=false;
     Element fakeBG = querySelector("#fakebg");
     Element container;
     int bossesDefeated = 0;
     Element hpMeter;
+    int speed = 6;
     List<Element> skyShit = new List<Element>();
     Element spookyOverlay;
     bool bossesSpawned = false;
@@ -48,6 +50,10 @@ class Game {
     }
 
     void display(Element parent) {
+        if(Uri.base.queryParameters['skipTutorial'] != null ) {
+            jrPrint("It's okay to skip the tutorial.");
+            skipTutorial = true;
+        }
         stupidExtraDivForSkyShit = new DivElement()..classes.add("gameContainer");
         handleSky();
         spookyOverlay = new DivElement()..classes.add("spookyOverLay");
@@ -72,7 +78,7 @@ class Game {
         ImageElement image = new ImageElement(src: "images/mind.png")..classes.add("logo");
         DivElement div2 = new DivElement()..text = "This game uses both audio and text to provide encouragement and instructions. It uses the keyboard for typing."..classes.add("instructions");
         DivElement div3 = new DivElement()..setInnerHtml("<a target='_blank' href = 'https://www.psychologytoday.com/us/blog/the-athletes-way/201707/silent-third-person-self-talk-facilitates-emotion-regulation'>Research</a> shows that phrasing positive, third person affirmations (structured like advice to a friend) can help.  Enter your own name, (or a name of a friend you care about), here.", treeSanitizer: NodeTreeSanitizer.trusted)..classes.add("instructions");
-        InputElement input = new InputElement()..value = "Valid Player";
+        InputElement input = new InputElement()..value = "Valid Player"..classes.add("nameInput");
         input.onInput.listen((Event e) {
             playerName = input.value.replaceAll(new RegExp(r'[^a-zA-Z ]'),"");
             start.text = "Ready, $playerName?";
@@ -116,7 +122,12 @@ class Game {
         container.append(hpMeter);
         SoundController.playMusic("Flowersim_Sadness");
 
-        TranscribedAudio.introAudio().display(container, tutorialIntroCallback);
+        if(!skipTutorial) {
+            TranscribedAudio.introAudio().display(
+                container, tutorialIntroCallback);
+        }else {
+            tick();
+        }
     }
 
     void tutorialIntroCallback() {
@@ -223,7 +234,7 @@ class Game {
             checkFlowersForDeath();
             checkBG();
             syncHP();
-            new Timer(new Duration(milliseconds: 3430 * 2), tick);
+            new Timer(new Duration(milliseconds: 1000 * speed), tick);
         }
     }
 

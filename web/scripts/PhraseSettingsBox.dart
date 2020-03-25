@@ -4,7 +4,7 @@
 import 'dart:html';
 
 import 'Weed.dart';
-
+import "Game.dart";
 abstract class PhraseSettingsBox {
 
     static void display(Element parent) {
@@ -12,23 +12,38 @@ abstract class PhraseSettingsBox {
         //TODO display checkbox, on click of text or checkbox, remove from list.
         final DivElement container = new DivElement()..classes.add("phraseSettings");
         parent.append(container);
-        container.append(new DivElement()..text = "It's okay if some of these phrases are too hard to encounter when you're not expecting it. It's okay, too, if you think you don't need to practice fighting these thoughts. You can customize your garden however you like."..classes.add("settingsUberInstructions"));
+        container.append(new DivElement()..setInnerHtml("It's okay if some of these phrases are too hard to encounter when you're not expecting it. It's okay, too, if you think you don't need to practice fighting these thoughts. <br><br>You can customize your garden however you like.  <br><br>You can even set how quickly the garden changes to make sure its the right level of chill for you.<br><br>If you want to skip the tutorial, that's an <a href = 'index.html?skipTutorial=true'>option</a>, too.")..classes.add("settingsUberInstructions"));
+        handleSpeed(container);
         displaySection(container, "OClock Lies/Truths", OClock.allPhrases);
         displaySection(container, "Absolute Lies/Truths", Absolute.allPhrases);
         displaySection(container, "BlackAndWhite Lies/Truths", BlackAndWhite.allPhrases);
 
     }
 
+    static void handleSpeed(Element parent) {
+        DivElement container = new DivElement()..classes.add("inputContainer");
+        LabelElement label = new LabelElement()..text = "Seconds Between Updates"..classes.add("label");
+        container.append(label);
+        NumberInputElement numberInputElement = new NumberInputElement()..classes.add("input");
+        container.append(numberInputElement);
+        numberInputElement.max = "13";
+        numberInputElement.min = "0";
+        parent.append(container);
+        numberInputElement.value = "${Game.instance.speed}";
+        numberInputElement.onChange.listen((Event e) {
+            Game.instance.speed = int.parse(numberInputElement.value);
+        });
+
+    }
+
     static void displaySection(Element parent, String label, List<List<dynamic>> phrases) {
         final DivElement container = new DivElement()..classes.add("phraseSettingSection");
         parent.append(container);
-        print("going to display section $label, with phrases $phrases");
         final DivElement titleElement = new DivElement()..text = "$label"..classes.add("settingsSectionLabel");
         final DivElement instructionElement = new DivElement()..text = "Choose Which Phrases To Encounter"..classes.add("settingsInstruction");
         container.append(titleElement);
         container.append(instructionElement);
         for(final List<dynamic> phrase in phrases) {
-            print("phrase is $phrase");
             final DivElement phraseContainer = new DivElement()..classes.add("phraseContainer");
             container.append(phraseContainer);
             final CheckboxInputElement check = new CheckboxInputElement()..classes.add("phraseCheckbox");

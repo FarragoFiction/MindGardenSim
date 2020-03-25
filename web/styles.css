@@ -254,6 +254,22 @@ html, body {
       padding: 10px;
 }
 
+.inputContainer{
+    display: grid;
+     grid-template-columns:  230px 50px 1fr;
+     grid-template-rows: 30px;
+     grid-gap: 10px;
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid white;
+}
+
+.inputContainer input{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 a{
     color: deepskyblue;
 }
@@ -289,7 +305,6 @@ input{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 50px;
 }
 
 .startbutton{
@@ -305,6 +320,16 @@ input{
     color: white;
     background: rgba(0,0,0,0);
     border: 3px solid white;
+}
+
+.phraseCheckbox{
+    margin-bottom: 50px;
+}
+
+
+
+.nameInput{
+    margin-bottom: 50px;
 }
 
 .transcription{
